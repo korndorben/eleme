@@ -1,10 +1,17 @@
 <!--index.wxml-->
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+    <view class="list">
+        <block wx:for="{{suppliers}}">
+            <navigator class="navigator" url="/pages/goods/goods?supplierid={{item.supplierid}}">
+                <view class="supplier">
+                    <view class="zan">123</view>
+                    <image class="logo" src="{{item.imagepath}}" />
+                    <view class="content">
+                        <view class="title">{{item.suppliername}}</view>
+                        <view class="desc">{{item.address1}}</view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+    </view>
 </view>
