@@ -4,60 +4,58 @@
   <view class="header">
     <view class="content-wrapper">
       <view class="avatar">
-        <image src="{{supplier.logo}}" style="width:64px;height:64px;"></image>
+        <image src="{{supplier.logo}}"></image>
       </view>
       <view class="content">
         <view class="title">
-          <image src="../image/brand@2x.png" style="width:30px;height:18px;"></image>
           <span class="name">{{supplier.name}}</span>
         </view>
-        <view class="description">
-          {{supplier.intro}}
-        </view>
-        <view wx:if="supplier.activelist[0]" class="support">
-          <span class="icon" :class="classMap[seller.supports[0].type]">
-            <image src="{{supplier.logo}}" style="width:12px;height:12px;"></image>
-          </span>
-          <span class="text">{{supplier.activelist[0].activityname}}</span>
-        </view>
+        <view class="description"> {{supplier.intro}} </view>
+        <view class="description"> {{supplier.address}} </view>
+        <view class="description"> {{supplier.hotline}} </view>
       </view>
-      <view class="supports-count">
-        <view class="count">5个</view>
-      </view>
-    </view>
-    <view class="bulletin-wrapper" wx:if="supplier.activelist[1]">
-      <image src="../image/bulletin@2x.png" style="width:22px;height:12px;"></image>
-      <span class="bulletin-text">{{supplier.activelist[1].activityname}}</span>
     </view>
     <view class="background">
-      <image src="{{supplier.logo}}" style="width:100%;height:100%;"></image>
+      <image src="{{supplier.logo}}"></image>
     </view>
   </view>
   <!--head -->
 
-  <view class="goods" wx:if="{{status==0||item.status==status}}">
+  <view class="dishs">
     <view class="menu-wrapper">
-      <scroll-view scroll-y="true" style="height: 450px;">
-        <view wx:for="{{supplier.dishcategories}}" class="menu-item border-1px {{toViewIndex==index ? 'active':''}}" bindtap="selectMenu" data-item-index="{{index}}">
+      <scroll-view scroll-y="true">
+        <view wx:for="{{supplier.dishcategories}}" class="menu-item border-1px {{toViewIndex==index ? 'active':''}}"
+            bindtap="selectMenu"
+            wx:for-index="dishcategoryindex"
+            data-dishcategoryindex="{{dishcategoryindex}}">
           <view class="text">
             {{item.name}}
           </view>
         </view>
       </scroll-view>
     </view>
-    <scroll-view scroll-y="true" style="height: 500px;" scroll-into-view="{{toView}}" class="foods-wrapper">
-      <view wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" class="food-list food-list-hook" wx:for-index="dishcategoryid">
-        <view id="order{{dishcategoryid}}" class="title">{{dishcategory.categoryname}}</view>
-        <view wx:for="{{dishcategory.dishs}}" class="food-item" wx:for-item="dish">
+    <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="dishs-wrapper">
+      <view class="dish-list dish-list-hook"
+          wx:for="{{supplier.dishcategories}}"
+          wx:for-item="dishcategory"
+          wx:for-index="dishcategoryindex"><!--分类-->
+        <view id="order{{dishcategoryindex}}" class="title">
+            {{dishcategory.name}} {{dishcategoryindex}}
+        </view>
+        <view wx:for="{{dishcategory.dishs}}"
+            class="dish-item"
+            wx:for-item="dish"
+            wx:for-index="dishindex"
+        >
           <view class="icon">
-            <image src="{{dish.imagepath}}" style="width: 57px;height: 57px"></image>
+            <image src="{{dish.dishimgurl}}" style="width: 57px;height: 57px"></image>
           </view>
           <view class="content">
-            <view class="name">{{dish.name}}</view>
-            <view class="desc">有人说很好吃，挑战一下</view>
+            <view class="name">{{dish.name}} {{dishindex}}</view>
+            <view class="desc">{{dish.intro}}</view>
             <view class="extra">
-              <text class="count">月售1</text>
-              <text class="count">好评2</text>
+              <text class="count">月售{{dish.dishs}}</text>
+              <text class="count">库存</text>
             </view>
             <view class="price">
               <view class="now">￥{{dish.dishattrs[0].price}}</view>
@@ -67,11 +65,15 @@
             <view class="cartControl-wrapper">
               <view class="cartControl">
                 <view name="fade">
-                  <view class="cart-decrease" wx:if="{{dish.Count > 0}}" data-item-index="{{dishid}}" data-parentIndex="{{dishcategoryid}}" catchtap="decreaseCart">
-                    <view class="inner iconfont icon-jian" style="font-size:32px;color:#00A0DC;"></view>
+                  <view class="cart-decrease" wx:if="{{dish.Count > 0}}"
+                        data-dishindex="{{dishindex}}"
+                        data-dishcategoryindex="{{dishcategoryindex}}" catchtap="decreaseCart">
+                    <view class="inner iconfont icon-jian"></view>
                   </view>
-                  <view class="cart-count" wx:if="{{food.Count > 0 }}">{{dish.Count}}</view>
-                  <view class=" iconfont icon-jia cart-add " style="color:#00A0DC; " data-item-index="{{dishid}}" data-parentIndex="{{dishcategoryid}}" catchtap="addCart"></view>
+                  <view class="cart-count" wx:if="{{dish.Count > 0 }}">{{dish.Count}}</view>
+                  <view class=" iconfont icon-jia cart-add "
+                      data-dishindex="{{dishindex}}"
+                      data-dishcategoryindex="{{dishcategoryindex}}" catchtap="addCart"></view>
                 </view>
               </view>
             </view>
@@ -115,7 +117,7 @@
         <text class="empty" bindtap="empty">清空</text>
       </view>
       <view class="list-content">
-        <view class="shopcart-food" wx:for="{{carArray}}">
+        <view class="shopcart-dish" wx:for="{{carArray}}">
           <text class="name">{{item.name}}</text>
           <view class="price" wx:if="{{item.num > 0}}">
             <span>￥{{item.price*item.num}}</span>

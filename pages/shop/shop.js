@@ -37,10 +37,10 @@ Page({
     decreaseCart: function(e) {
         var index = e.currentTarget.dataset.itemIndex;
         var parentIndex = e.currentTarget.dataset.parentindex;
-        this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count--
-            var num = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count;
+        this.data.supplier.dishcategories[parentIndex].dishs[index].Count--
+            var num = this.data.supplier.dishcategories[parentIndex].dishs[index].Count;
         var mark = 'a' + index + 'b' + parentIndex
-        var price = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].price;
+        var price = this.data.supplier.dishcategories[parentIndex].dishs[index].price;
         var obj = {
             price: price,
             num: num,
@@ -82,14 +82,15 @@ Page({
     },
     //添加到购物车
     addCart(e) {
-        var index = e.currentTarget.dataset.itemIndex;
-        var parentIndex = e.currentTarget.dataset.parentindex;
-        this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count || 0;
-        this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count++;
+        console.log(e.currentTarget.dataset);
+        var index = e.currentTarget.dataset.dishindex;
+        var parentIndex = e.currentTarget.dataset.dishcategoryindex;
+        this.data.supplier.dishcategories[parentIndex].dishs[index].Count = this.data.supplier.dishcategories[parentIndex].dishs[index].Count || 0;
+        this.data.supplier.dishcategories[parentIndex].dishs[index].Count++;
         var mark = 'a' + index + 'b' + parentIndex
-        var price = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].price;
-        var num = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].Count;
-        var name = this.data.supplier.supplierdishlist[parentIndex].supplierdishlist[index].supplierdishname;
+        var price = this.data.supplier.dishcategories[parentIndex].dishs[index].price;
+        var num = this.data.supplier.dishcategories[parentIndex].dishs[index].Count;
+        var name = this.data.supplier.dishcategories[parentIndex].dishs[index].name;
         var obj = {
             price: price,
             num: num || 1,
@@ -205,29 +206,12 @@ Page({
             url: 'http://localhost:3000/graphql',
             method: 'post',
             data: {
-              query:`{
-  supplier(id: 1) {
-    id
-    name
-    intro
-    dishcategories {
-      id
-      name
-      dishs {
-        id
-        name
-        imgurl
-        dishattrs {
-          id
-          name
-          price
-          stock
-        }
-      }
-    }
-  }
-}
-`
+              query:`query ($supplierid: Int!, $marketmask: String, $customerlevelid: Int) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro fn_ordercoupons { id type supplierid activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice } dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro restaurant_id: supplierid dishs: fn_h5_dishs { id dishcategoryid dishs supplierid dishimage name market dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock } attrlimit } dishgroups { id dishid dishattrid dish { id name } dishattr { id name price stock } id tag attrlimit attrtaglimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packcharge satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
+              variables:{
+                  supplierid:1,
+                  marketmask:'11111',
+                  customerlevelid:0
+              }
             },
             header: {
                 'Accept': 'application/json'
