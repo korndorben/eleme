@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="container">
     <view class="list">
-        <block wx:for="{{suppliers}}">
-            <navigator class="navigator" url="/pages/goods/goods?supplierid={{item.supplierid}}">
+        <block>
+            <navigator class="navigator" url="/pages/shop/shop?supplierid=1">
                 <view class="supplier">
                     <view class="zan">123</view>
                     <image class="logo" src="{{item.imagepath}}" />

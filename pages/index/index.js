@@ -24,7 +24,7 @@ Page({
             type: 'wgs84',
             success: function(res) {
                 wx.request({
-                    url: 'https://ct.etao.cn/api/supplier/list',
+                    url: 'http://ct.etao.cn/api/supplier/list',
                     method: 'get',
                     data: {
                         currlongitude: res.longitude,

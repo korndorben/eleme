@@ -202,18 +202,40 @@ Page({
         });
 
         wx.request({
-            url: 'https://ct.etao.cn/api/supplier/menu',
-            method: 'GET',
+            url: 'http://localhost:3000/graphql',
+            method: 'post',
             data: {
-                supplierid: option.supplierid,
-                menutypeid: 2
+              query:`{
+  supplier(id: 1) {
+    id
+    name
+    intro
+    dishcategories {
+      id
+      name
+      dishs {
+        id
+        name
+        imgurl
+        dishattrs {
+          id
+          name
+          price
+          stock
+        }
+      }
+    }
+  }
+}
+`
             },
             header: {
                 'Accept': 'application/json'
             },
             success: function(res) {
+                console.log(res)
                 that.setData({
-                    supplier: res.data.data
+                  supplier: res.data.data.supplier[0]
                 });
             }
         })

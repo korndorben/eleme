@@ -1,0 +1,141 @@
+<!--pages/order/order.wxml-->
+<!--head -->
+<view class="{{comask}}" bindtap="toggleMask">
+  <view class="header">
+    <view class="content-wrapper">
+      <view class="avatar">
+        <image src="{{supplier.logo}}" style="width:64px;height:64px;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <image src="../image/brand@2x.png" style="width:30px;height:18px;"></image>
+          <span class="name">{{supplier.name}}</span>
+        </view>
+        <view class="description">
+          {{supplier.intro}}
+        </view>
+        <view wx:if="supplier.activelist[0]" class="support">
+          <span class="icon" :class="classMap[seller.supports[0].type]">
+            <image src="{{supplier.logo}}" style="width:12px;height:12px;"></image>
+          </span>
+          <span class="text">{{supplier.activelist[0].activityname}}</span>
+        </view>
+      </view>
+      <view class="supports-count">
+        <view class="count">5个</view>
+      </view>
+    </view>
+    <view class="bulletin-wrapper" wx:if="supplier.activelist[1]">
+      <image src="../image/bulletin@2x.png" style="width:22px;height:12px;"></image>
+      <span class="bulletin-text">{{supplier.activelist[1].activityname}}</span>
+    </view>
+    <view class="background">
+      <image src="{{supplier.logo}}" style="width:100%;height:100%;"></image>
+    </view>
+  </view>
+  <!--head -->
+
+  <view class="goods" wx:if="{{status==0||item.status==status}}">
+    <view class="menu-wrapper">
+      <scroll-view scroll-y="true" style="height: 450px;">
+        <view wx:for="{{supplier.dishcategories}}" class="menu-item border-1px {{toViewIndex==index ? 'active':''}}" bindtap="selectMenu" data-item-index="{{index}}">
+          <view class="text">
+            {{item.name}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <scroll-view scroll-y="true" style="height: 500px;" scroll-into-view="{{toView}}" class="foods-wrapper">
+      <view wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" class="food-list food-list-hook" wx:for-index="dishcategoryid">
+        <view id="order{{dishcategoryid}}" class="title">{{dishcategory.categoryname}}</view>
+        <view wx:for="{{dishcategory.dishs}}" class="food-item" wx:for-item="dish">
+          <view class="icon">
+            <image src="{{dish.imagepath}}" style="width: 57px;height: 57px"></image>
+          </view>
+          <view class="content">
+            <view class="name">{{dish.name}}</view>
+            <view class="desc">有人说很好吃，挑战一下</view>
+            <view class="extra">
+              <text class="count">月售1</text>
+              <text class="count">好评2</text>
+            </view>
+            <view class="price">
+              <view class="now">￥{{dish.dishattrs[0].price}}</view>
+            </view>
+
+            <!--cartControl-->
+            <view class="cartControl-wrapper">
+              <view class="cartControl">
+                <view name="fade">
+                  <view class="cart-decrease" wx:if="{{dish.Count > 0}}" data-item-index="{{dishid}}" data-parentIndex="{{dishcategoryid}}" catchtap="decreaseCart">
+                    <view class="inner iconfont icon-jian" style="font-size:32px;color:#00A0DC;"></view>
+                  </view>
+                  <view class="cart-count" wx:if="{{food.Count > 0 }}">{{dish.Count}}</view>
+                  <view class=" iconfont icon-jia cart-add " style="color:#00A0DC; " data-item-index="{{dishid}}" data-parentIndex="{{dishcategoryid}}" catchtap="addCart"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+
+    <view name="fade">
+      <view class="list-mask" wx:if="{{listShow}}" bindtap="hideList"></view>
+    </view>
+  </view>
+</view>
+
+<!--shopCart-->
+<view>
+  <view class="shopCart">
+    <view class="content" bindtap="toggleList">
+      <view class="content-left">
+        <view class="logo-wrapper">
+          <view class="logo highlight">
+            <view class="iconfont icon-gouwuche highlight"></view>
+          </view>
+          <view class="num" wx:if="{{totalCount> 0}}">{{totalCount}}</view>
+        </view>
+        <view class="price highlight">￥{{totalPrice}}</view>
+        <view class="desc">另需配送费￥{{deliveryPrice}}元</view>
+      </view>
+      <view class="content-right" catchtap="pay">
+        <navigator url="/pages/details/index">
+          <view class="pay enough">
+            {{payDesc}}
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class="shopcart-list" style="display:{{cartShow}}">
+      <view class="list-header">
+        <view class="title">购物车</view>
+        <text class="empty" bindtap="empty">清空</text>
+      </view>
+      <view class="list-content">
+        <view class="shopcart-food" wx:for="{{carArray}}">
+          <text class="name">{{item.name}}</text>
+          <view class="price" wx:if="{{item.num > 0}}">
+            <span>￥{{item.price*item.num}}</span>
+          </view>
+
+          <!--cartControl-->
+          <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.num > 0}}">
+            <view class="cartControl" style="width:80px;">
+              <view name="fade">
+                <view class="cart-decrease" style="display:inline-block;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="decreaseShopCart">
+                  <view class="inner iconfont icon-jian" style="font-size:24px;color:#00A0DC;"></view>
+                </view>
+                <view class="cart-count" style="display:inline-block;width:32px;text-align:center;font-size:14px;">{{item.num}}</view>
+                <view class=" iconfont icon-jia cart-add " style="font-size:24px;color:#00A0DC; padding:0;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="addShopCart"></view>
+              </view>
+            </view>
+          </view>
+          <!--cartControl-->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
