@@ -4,6 +4,69 @@
 
 /* pages/goodss/goodss.wxss */
 
+.choosespecwindowcontainer{
+    width:100%;
+    height:100%;
+    background-color:#000;
+    position:fixed;
+    top:0;
+    left:0;
+    opacity:0.5;
+    z-index:100;
+}
+.choosespecwindow{
+    width:80%;
+    background-color:#fff;
+    position:fixed;
+    top:20%;
+    left:10%;
+    opacity:1;
+    z-index:200;
+    padding:0;
+    margin:0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.choosespecwindow .header{
+    padding:10px;
+}
+.choosespecwindow .content{
+    height:300px;/* 滚动视图 */
+}
+.choosespecwindow .content .tagblock {
+    border-bottom: 1px solid #ccc;
+}
+.choosespecwindow .content .tagblock .tagtitle{
+    font-size:14px;
+    padding:10px;
+    background-color: #f8f8f8;
+}
+.choosespecwindow .content .tagblock .taglist{
+    padding:10px;
+    display: flex;
+    flex-wrap:wrap;
+}
+.choosespecwindow .content .tagblock .tag{
+    width:20%;
+    border:1px solid #ccc;
+    font-size:12px;
+    padding:5px;
+    margin:5px;
+}
+.choosespecwindow .footer{
+    padding:10px;
+    display: flex;
+    background-color: #f8f8f8;
+}
+.choosespecwindow .footer .choosespec{
+    width:40%;
+    line-height:30px;
+    font-size:12px;
+    height:30px;
+    /* flex:1 */
+}
+
+
 
 .dishs {
     display: flex;
@@ -200,6 +263,10 @@
     font-size: 18px;
     vertical-align: top;
     color:#00A0DC;
+}
+.dishs .dishs-wrapper .dish-list .dish-item .content .cartControl-wrapper .cartControl .choosespec {
+    line-height: 24px;
+    font-size: 12px;
 }
 
 
@@ -428,8 +495,7 @@
 
 .header .content-wrapper {
     position: relative;
-    padding: 24px 12px 18px 24px;
-    font-size: 0;
+    padding: 10px;
 }
 
 .header .content-wrapper .avatar {
@@ -441,7 +507,7 @@
     border-radius: 50%;
     width: 64px;
     height:64px;
-    border:1px solid #fff;
+    border:2px solid #fff;
 }
 
 .header .content-wrapper .content {
@@ -508,7 +574,7 @@
 }
 
 .comask{
-    background-color:#000000;
+    background:rgba(0,0,0,.5);
     width:100%;
     height:100%;
     opacity:0.6;

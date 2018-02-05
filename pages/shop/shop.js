@@ -1,4 +1,4 @@
-// pages/goods/goods.js
+// pages/shop/shop.js
 Page({
     data: {
         toView: '0',
@@ -25,29 +25,32 @@ Page({
 
     //选择分类
     selectMenu: function(e) {
-        var index = e.currentTarget.dataset.itemIndex;
+        var dishindex = e.currentTarget.dataset.dishcategoryindex;
         this.setData({
-            toView: 'order' + index.toString(),
-            toViewIndex: index
+            toView: 'order' + dishindex.toString(),
+            toViewIndex: dishindex
         })
         console.log(this.data.toView);
+    },
+    choosespec:function (e) {
+        console.log(e.currentTarget.dataset);
     },
 
     //移除商品
     decreaseCart: function(e) {
-        var index = e.currentTarget.dataset.itemIndex;
-        var parentIndex = e.currentTarget.dataset.parentindex;
-        this.data.supplier.dishcategories[parentIndex].dishs[index].Count--
-            var num = this.data.supplier.dishcategories[parentIndex].dishs[index].Count;
-        var mark = 'a' + index + 'b' + parentIndex
-        var price = this.data.supplier.dishcategories[parentIndex].dishs[index].price;
+        var dishindex = e.currentTarget.dataset.dishindex;
+        var dishcategoryindex = e.currentTarget.dataset.dishcategoryindex;
+        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num--
+            var num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num;
+        var mark = 'a' + dishindex + 'b' + dishcategoryindex
+        var price = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].price;
         var obj = {
             price: price,
             num: num,
             mark: mark,
             name: name,
-            index: index,
-            parentIndex: parentIndex
+            dishindex: dishindex,
+            dishcategoryindex: dishcategoryindex
         };
         var carArray1 = this.data.carArray.filter(item => item.mark != mark);
         carArray1.push(obj);
@@ -83,21 +86,21 @@ Page({
     //添加到购物车
     addCart(e) {
         console.log(e.currentTarget.dataset);
-        var index = e.currentTarget.dataset.dishindex;
-        var parentIndex = e.currentTarget.dataset.dishcategoryindex;
-        this.data.supplier.dishcategories[parentIndex].dishs[index].Count = this.data.supplier.dishcategories[parentIndex].dishs[index].Count || 0;
-        this.data.supplier.dishcategories[parentIndex].dishs[index].Count++;
-        var mark = 'a' + index + 'b' + parentIndex
-        var price = this.data.supplier.dishcategories[parentIndex].dishs[index].price;
-        var num = this.data.supplier.dishcategories[parentIndex].dishs[index].Count;
-        var name = this.data.supplier.dishcategories[parentIndex].dishs[index].name;
+        var dishindex = e.currentTarget.dataset.dishindex;
+        var dishcategoryindex = e.currentTarget.dataset.dishcategoryindex;
+        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num || 0;
+        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num++;
+        var mark = 'a' + dishindex + 'b' + dishcategoryindex
+        var price = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].price;
+        var num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num;
+        var name = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].name;
         var obj = {
             price: price,
             num: num || 1,
             mark: mark,
             name: name,
-            index: index,
-            parentIndex: parentIndex
+            dishindex: dishindex,
+            dishcategoryindex: dishcategoryindex
         };
         var carArray1 = this.data.carArray.filter(item => item.mark != mark)
         carArray1.push(obj)
@@ -158,15 +161,12 @@ Page({
             return;
         }
 
-
         this.setData({
             fold: !this.data.fold,
         })
         var fold = this.data.fold
 
-        //console.log(this.data.fold);
         this.cartShow(fold)
-        // this.toggleMask(fold)
     },
     toggleMask: function() {
         if (!this.data.fold) {
