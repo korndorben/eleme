@@ -25,6 +25,7 @@ App({
         }
     },
     globalData: {
-        userInfo: null
+        userInfo: null,
+        baseUrl: 'http://nm.etao.cn/api/graphql'
     }
 })

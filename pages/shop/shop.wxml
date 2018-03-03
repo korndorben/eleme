@@ -8,7 +8,7 @@
             </view>
             <view class="content">
                 <view class="title">
-                    <span class="name">{{supplier.name}} {{fold}}</span>
+                    <span class="name">{{supplier.name}}</span>
                 </view>
                 <view class="description"> {{supplier.intro}} </view>
                 <view class="description"> {{supplier.address}} </view>
@@ -79,10 +79,10 @@
     </view>
 </view>
 <!--规格选择-->
-<view class="choosespecwindowcontainer" wx:if="fold">
+<view class="choosespecwindowcontainer" wx:if="{{fold}}">
 
 </view>
-<view class="choosespecwindow" wx:if="fold">
+<view class="choosespecwindow" wx:if="{{fold}}">
     <view class="header">选规格</view>
     <scroll-view scroll-y class="content">
         <view class="tagblock">

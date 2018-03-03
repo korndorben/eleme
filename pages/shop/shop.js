@@ -1,4 +1,6 @@
 // pages/shop/shop.js
+var app = getApp();
+
 Page({
     data: {
         toView: '0',
@@ -12,7 +14,7 @@ Page({
         minPrice: 20, //起送價格
         payDesc: '',
         deliveryPrice: 4, //配送費
-        fold: true,
+        fold: false,
         selectFoods: [{
             price: 20,
             count: 2
@@ -203,7 +205,7 @@ Page({
         });
 
         wx.request({
-            url: 'http://localhost:3000/graphql',
+            url: app.globalData.baseUrl,
             method: 'post',
             data: {
               query:`query ($supplierid: Int!, $marketmask: String, $customerlevelid: Int) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro fn_ordercoupons { id type supplierid activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice } dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro restaurant_id: supplierid dishs: fn_h5_dishs { id dishcategoryid dishs supplierid dishimage name market dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock } attrlimit } dishgroups { id dishid dishattrid dish { id name } dishattr { id name price stock } id tag attrlimit attrtaglimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packcharge satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
