@@ -1,5 +1,6 @@
 // pages/shop/shop.js
 var app = getApp();
+const util = require('../../utils/util.js');
 
 Page({
     data: {
@@ -34,7 +35,8 @@ Page({
         })
         console.log(this.data.toView);
     },
-    choosespec:function (e) {
+    choosespec: function(e) {
+        this.fold = !this.fold;
         console.log(e.currentTarget.dataset);
     },
 
@@ -208,20 +210,29 @@ Page({
             url: app.globalData.baseUrl,
             method: 'post',
             data: {
-              query:`query ($supplierid: Int!, $marketmask: String, $customerlevelid: Int) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro fn_ordercoupons { id type supplierid activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice } dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro restaurant_id: supplierid dishs: fn_h5_dishs { id dishcategoryid dishs supplierid dishimage name market dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock } attrlimit } dishgroups { id dishid dishattrid dish { id name } dishattr { id name price stock } id tag attrlimit attrtaglimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packcharge satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
-              variables:{
-                  supplierid:1,
-                  marketmask:'11111',
-                  customerlevelid:0
-              }
+                query: `query querysupplier($supplierid: Int!, $marketmask: String, $customerlevelid: Int = 0) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro dishs: fn_h5_dishs { id dishcategoryid dishs supplierid dishimage name markets dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock packagefee } attrlimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packagefee satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
+                variables: {
+                    supplierid: 1,
+                    marketmask: '111111111111111',
+                    customerlevelid: 0
+                }
             },
             header: {
                 'Accept': 'application/json'
             },
             success: function(res) {
                 console.log(res)
+                let [supplier] = res.data.data.supplier;
+                for (let dishcategory of supplier.dishcategories) {
+                    for (let dish of dishcategory.dishs) {
+                        for (let dishattr of dish.dishattrs) {
+                            //只能在这里格式化
+                            dishattr.pricetext = util.formatDecimal(dishattr.price);
+                        }
+                    }
+                }
                 that.setData({
-                  supplier: res.data.data.supplier[0]
+                    supplier:supplier
                 });
             }
         })

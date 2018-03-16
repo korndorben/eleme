@@ -39,32 +39,31 @@
                 </view>
                 <view wx:for="{{dishcategory.dishs}}" class="dish-item" wx:for-item="dish" wx:for-index="dishindex">
                     <view class="icon">
-                        <image src="{{dish.dishimgurl}}" style="width: 57px;height: 57px"></image>
+                        <image src="{{dish.dishimage}}" style="width: 57px;height: 57px"></image>
                     </view>
                     <view class="content">
                         <view class="name">{{dish.name}} {{dishindex}}</view>
                         <view class="desc">{{dish.intro}}</view>
                         <view class="extra">
                             <text class="count">月售{{dish.dishs}}</text>
-                            <text class="count">库存</text>
                         </view>
                         <view class="price">
-                            <view class="now">￥{{dish.dishattrs[0].price}}</view>
+                            <view class="now">￥{{dish.dishattrs[0].pricetext}}</view>
                         </view>
 
                         <!--cartControl-->
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
-                                <view name="fade">
+                                <view name="fade" wx:if="{{dish.dishattrs.length==1}}">
                                     <view class="cart-decrease" wx:if="{{dish.num > 0}}" data-dishindex="{{dishindex}}" data-dishcategoryindex="{{dishcategoryindex}}" catchtap="decreaseCart">
                                         <view class="inner iconfont icon-jian"></view>
                                     </view>
                                     <view class="cart-count" wx:if="{{dish.num > 0 }}">{{dish.num}}</view>
                                     <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dishcategoryindex="{{dishcategoryindex}}" catchtap="addCart"></view>
                                 </view>
-                                <!-- <view name="fade">
+                                 <view wx:else name="fade">
                                     <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">选规格</button>
-                                </view> -->
+                                </view>
                             </view>
                         </view>
                     </view>
