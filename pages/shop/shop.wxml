@@ -32,12 +32,12 @@
             </scroll-view>
         </view>
         <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="dishs-wrapper">
-            <view class="dish-list dish-list-hook" wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" wx:for-index="dishcategoryindex">
+            <view class="dish-list dish-list-hook" wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" wx:for-index="dishcategoryid">
                 <!--分类-->
-                <view id="order{{dishcategoryindex}}" class="title">
+                <view id="order{{dishcategoryid}}" class="title">
                     {{dishcategory.name}} {{dishcategoryindex}}
                 </view>
-                <view wx:for="{{dishcategory.dishs}}" class="dish-item" wx:for-item="dish" wx:for-index="dishindex">
+                <view wx:for="{{dishcategory.dishs}}" class="dish-item" wx:for-item="dish" wx:for-index="dishid">
                     <view class="icon">
                         <image src="{{dish.dishimage}}" style="width: 57px;height: 57px"></image>
                     </view>
@@ -55,11 +55,11 @@
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
                                 <view name="fade" wx:if="{{dish.dishattrs.length==1}}">
-                                    <view class="cart-decrease" wx:if="{{dish.num > 0}}" data-dishindex="{{dishindex}}" data-dishcategoryindex="{{dishcategoryindex}}" catchtap="decreaseCart">
+                                    <view class="cart-decrease" wx:if="{{dish.num > 0}}" data-dishid="{{dishid}}" data-dishcategoryid="{{dishcategoryid}}" catchtap="decreaseCart">
                                         <view class="inner iconfont icon-jian"></view>
                                     </view>
                                     <view class="cart-count" wx:if="{{dish.num > 0 }}">{{dish.num}}</view>
-                                    <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dishcategoryindex="{{dishcategoryindex}}" catchtap="addCart"></view>
+                                    <view class=" iconfont icon-jia cart-add " data-dishid="{{dishid}}" data-dishcategoryid="{{dishcategoryid}}" catchtap="addCart"></view>
                                 </view>
                                  <view wx:else name="fade">
                                     <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">选规格</button>

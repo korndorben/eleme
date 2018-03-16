@@ -1,5 +1,5 @@
 // pages/shop/shop.js
-var app = getApp();
+let app = getApp();
 const util = require('../../utils/util.js');
 
 Page({
@@ -28,10 +28,10 @@ Page({
 
     //选择分类
     selectMenu: function(e) {
-        var dishindex = e.currentTarget.dataset.dishcategoryindex;
+        let dishid = e.currentTarget.dataset.dishcategoryid;
         this.setData({
-            toView: 'order' + dishindex.toString(),
-            toViewIndex: dishindex
+            toView: 'order' + dishid.toString(),
+            toViewIndex: dishid
         })
         console.log(this.data.toView);
     },
@@ -42,21 +42,21 @@ Page({
 
     //移除商品
     decreaseCart: function(e) {
-        var dishindex = e.currentTarget.dataset.dishindex;
-        var dishcategoryindex = e.currentTarget.dataset.dishcategoryindex;
-        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num--
-            var num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num;
-        var mark = 'a' + dishindex + 'b' + dishcategoryindex
-        var price = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].price;
-        var obj = {
+        let dishid = e.currentTarget.dataset.dishid;
+        let dishcategoryid = e.currentTarget.dataset.dishcategoryid;
+        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity--
+            let quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity;
+        let mark = `dishcategory${dishcategoryid}-dish${dishid}`
+        let price = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].dishattrs[0].price;
+        let obj = {
             price: price,
-            num: num,
+            quantity: quantity,
             mark: mark,
             name: name,
-            dishindex: dishindex,
-            dishcategoryindex: dishcategoryindex
+            dishid: dishid,
+            dishcategoryid: dishcategoryid
         };
-        var carArray1 = this.data.carArray.filter(item => item.mark != mark);
+        let carArray1 = this.data.carArray.filter(item => item.mark != mark);
         carArray1.push(obj);
         console.log(carArray1);
         this.setData({
@@ -68,15 +68,15 @@ Page({
             payDesc: this.payDesc(),
         })
         //关闭弹起
-        var count1 = 0
+        let count1 = 0
         for (let i = 0; i < carArray1.length; i++) {
-            if (carArray1[i].num == 0) {
+            if (carArray1[i].quantity == 0) {
                 count1++;
             }
         }
         //console.log(count1)
         if (count1 == carArray1.length) {
-            if (num == 0) {
+            if (quantity == 0) {
                 this.setData({
                     cartShow: 'none',
                     comask: ''
@@ -90,23 +90,25 @@ Page({
     //添加到购物车
     addCart(e) {
         console.log(e.currentTarget.dataset);
-        var dishindex = e.currentTarget.dataset.dishindex;
-        var dishcategoryindex = e.currentTarget.dataset.dishcategoryindex;
-        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num || 0;
-        this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num++;
-        var mark = 'a' + dishindex + 'b' + dishcategoryindex
-        var price = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].price;
-        var num = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].num;
-        var name = this.data.supplier.dishcategories[dishcategoryindex].dishs[dishindex].name;
-        var obj = {
+        let dishid = e.currentTarget.dataset.dishid;
+        let dishcategoryid = e.currentTarget.dataset.dishcategoryid;
+        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity || 0;
+        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity++;
+        let mark = `dishcategory${dishcategoryid}-dish${dishid}`
+        let price = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].dishattrs[0].price;
+        let quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity;
+        let name = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].name;
+        let obj = {
             price: price,
-            num: num || 1,
+            quantity: quantity || 1,
             mark: mark,
             name: name,
-            dishindex: dishindex,
-            dishcategoryindex: dishcategoryindex
+            dishid: dishid,
+            dishcategoryid: dishcategoryid
         };
-        var carArray1 = this.data.carArray.filter(item => item.mark != mark)
+        console.log('obj');
+        console.log(obj);
+        let carArray1 = this.data.carArray.filter(item => item.mark != mark)
         carArray1.push(obj)
         console.log(carArray1);
         this.setData({
@@ -123,12 +125,19 @@ Page({
     },
     //计算总价
     calTotalPrice: function() {
-        var carArray = this.data.carArray;
-        var totalPrice = 0;
-        var totalCount = 0;
-        for (var i = 0; i < carArray.length; i++) {
-            totalPrice += carArray[i].price * carArray[i].num;
-            totalCount += carArray[i].num
+        let totalPrice = 0;
+        let totalCount = 0;
+        for (let dishcategory of this.data.supplier.dishcategories) {
+            for (let dish of dishcategory.dishs) {
+                if (dish.quantity <= 0) {
+                    continue
+                }
+
+                for (let dishattr of dish.dishattrs) {
+                    totalPrice += dishattr.price * dishattr.quantity;
+                    totalCount += dishattr.quantity
+                }
+            }
         }
         this.setData({
             totalPrice: totalPrice,
@@ -154,7 +163,7 @@ Page({
         }
         // window.alert('支付' + this.totalPrice + '元');
         //确认支付逻辑
-        var resultType = "success";
+        let resultType = "success";
         wx.redirectTo({
             url: '../goods/pay/pay?resultType=' + resultType
         })
@@ -168,7 +177,7 @@ Page({
         this.setData({
             fold: !this.data.fold,
         })
-        var fold = this.data.fold
+        let fold = this.data.fold
 
         this.cartShow(fold)
     },
@@ -193,7 +202,7 @@ Page({
         console.log(this.data.cartShow);
     },
     tabChange: function(e) {
-        var showtype = e.target.dataset.type;
+        let showtype = e.target.dataset.type;
         this.setData({
             status: showtype,
         });
@@ -210,7 +219,7 @@ Page({
             url: app.globalData.baseUrl,
             method: 'post',
             data: {
-                query: `query querysupplier($supplierid: Int!, $marketmask: String, $customerlevelid: Int = 0) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro dishs: fn_h5_dishs { id dishcategoryid dishs supplierid dishimage name markets dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock packagefee } attrlimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packagefee satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
+                query: `query querysupplier($supplierid: Int!, $marketmask: String, $customerlevelid: Int = 0) { supplier(id: $supplierid, marketmask: $marketmask) { id name address logo intro dishcategories: fn_h5_dishcategories { id dishcategoryid: id name intro dishs: fn_h5_dishs { id dishid:id dishcategoryid dishs supplierid dishimage name markets dishsuites { id virtualdishid dishid dishattrid dish { id name } dishattr { id name price stock packagefee } attrlimit } dishproperties { id selected: id name dishid tag attrtaglimit attrlimit price } dishattrs: fn_h5_dishattrs { id stock name price packagefee satisfy_rate: id month_sales: id rating: id fn_specialoffers { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_dishcoupons { id activityid activityname activitypackageid activitypackagename discountrate discount integral extraprice sellingprice originalprice quantity nthdish dishcategoryid dishid dishattrid } fn_customercoupontemplates(customerlevelid: $customerlevelid) { id customerlevelid customerlevelname customercoupontemplateid name dishid dishattrid sellingprice originalprice discountrate discount integral extraprice } } } } } } `,
                 variables: {
                     supplierid: 1,
                     marketmask: '111111111111111',
@@ -232,7 +241,7 @@ Page({
                     }
                 }
                 that.setData({
-                    supplier:supplier
+                    supplier: supplier
                 });
             }
         })
