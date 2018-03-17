@@ -10,16 +10,14 @@ Page({
         scrollTop: 100,
         foodCounts: 0,
         totalPrice: 0, // 总价格
+        totalPriceDescription: '',
         totalCount: 0, // 总商品数
         carArray: [],
         minPrice: 20, //起送價格
         payDesc: '',
         deliveryPrice: 4, //配送費
         fold: false,
-        selectFoods: [{
-            price: 20,
-            count: 2
-        }],
+        selectFoods: {},
         cartShow: 'none',
         status: 0,
         comask: '',
@@ -42,46 +40,44 @@ Page({
 
     //移除商品
     decreaseCart: function(e) {
-        let dishid = e.currentTarget.dataset.dishid;
-        let dishcategoryid = e.currentTarget.dataset.dishcategoryid;
-        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity--
-            let quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity;
-        let mark = `dishcategory${dishcategoryid}-dish${dishid}`
-        let price = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].dishattrs[0].price;
-        let obj = {
-            price: price,
-            quantity: quantity,
-            mark: mark,
-            name: name,
-            dishid: dishid,
-            dishcategoryid: dishcategoryid
-        };
-        let carArray1 = this.data.carArray.filter(item => item.mark != mark);
-        carArray1.push(obj);
-        console.log(carArray1);
+        let dish = e.currentTarget.dataset.dish;
+        dish.quantity -= 1;
+        if (dish.quantity <= 0) {
+            dish.quantity = 0
+        }
+        let dishcategoryid = dish.dishcategoryid;
+        let mark = `dishcategory${dishcategoryid}-dish${dish.id}-dishattr${dish.dishattrs[0].id}`
+        let item = this.data.carArray.find(item => item.mark == mark)
+        if (this.data.carArray.length <= 0 || !item) {
+            return
+        }
+        item.quantity--;
+        if (item.quantity <= 0) {
+            item.quantity = 0
+        }
+
         this.setData({
-            carArray: carArray1,
+            carArray: this.data.carArray,
             supplier: this.data.supplier
         })
-        this.calTotalPrice()
+        this.calTotalPrice();
         this.setData({
-            payDesc: this.payDesc(),
+            carArray: this.data.carArray,
+            payDesc: this.payDesc()
         })
         //关闭弹起
         let count1 = 0
-        for (let i = 0; i < carArray1.length; i++) {
-            if (carArray1[i].quantity == 0) {
+        for (let i = 0; i < this.data.carArray.length; i++) {
+            if (this.data.carArray[i].quantity) {
                 count1++;
             }
         }
         //console.log(count1)
-        if (count1 == carArray1.length) {
-            if (quantity == 0) {
-                this.setData({
-                    cartShow: 'none',
-                    comask: ''
-                })
-            }
+        if (count1 <= 0) {
+            this.setData({
+                cartShow: 'none',
+                comask: ''
+            })
         }
     },
     decreaseShopCart: function(e) {
@@ -89,76 +85,38 @@ Page({
     },
     //添加到购物车
     addCart(e) {
-        console.log(e.currentTarget.dataset);
-        let dishid = e.currentTarget.dataset.dishid;
-        let dishcategoryid = e.currentTarget.dataset.dishcategoryid;
-        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity || 0;
-        this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity++;
-        let mark = `dishcategory${dishcategoryid}-dish${dishid}`
-        let price = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].dishattrs[0].price;
-        let quantity = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].quantity;
-        let name = this.data.supplier.dishcategories[dishcategoryid].dishs[dishid].name;
-        let obj = {
-            price: price,
-            quantity: quantity || 1,
-            mark: mark,
-            name: name,
-            dishid: dishid,
-            dishcategoryid: dishcategoryid
-        };
-        console.log('obj');
-        console.log(obj);
-        let carArray1 = this.data.carArray.filter(item => item.mark != mark)
-        carArray1.push(obj)
-        console.log(carArray1);
+        let dish = e.currentTarget.dataset.dish; //当前菜品
+        let selectFoods = this.data.selectFoods
+        if (!selectFoods[dish.id]) {
+            selectFoods[dish.id] = {
+                quantity: 1,
+                dish: dish,
+                dishattr: dish.dishattrs[0],
+            }
+        } else {
+            selectFoods[dish.id]['quantity']++
+        }
+
+        let totalPrice = 0;
+        let totalCount = 0;
+        for (let key of Object.keys(selectFoods)) {
+            totalCount += selectFoods[key]['quantity']
+            totalPrice += 1 * selectFoods[key]['quantity'] * selectFoods[key]['dishattr']['price']
+        }
         this.setData({
-            carArray: carArray1,
-            supplier: this.data.supplier
-        })
-        this.calTotalPrice();
-        this.setData({
-            payDesc: this.payDesc()
+            totalPrice: totalPrice,
+            totalCount: totalCount,
+            selectFoods: selectFoods,
+            totalPriceDescription: '￥' + (totalPrice / 100).toFixed(2)
         })
     },
     addShopCart: function(e) {
         this.addCart(e);
     },
-    //计算总价
-    calTotalPrice: function() {
-        let totalPrice = 0;
-        let totalCount = 0;
-        for (let dishcategory of this.data.supplier.dishcategories) {
-            for (let dish of dishcategory.dishs) {
-                if (dish.quantity <= 0) {
-                    continue
-                }
 
-                for (let dishattr of dish.dishattrs) {
-                    totalPrice += dishattr.price * dishattr.quantity;
-                    totalCount += dishattr.quantity
-                }
-            }
-        }
-        this.setData({
-            totalPrice: totalPrice,
-            totalCount: totalCount,
-            //payDesc: this.payDesc()
-        });
-    },
-    //差几元起送
-    payDesc() {
-        if (this.data.totalPrice === 0) {
-            return `￥${this.data.minPrice}元起送`;
-        } else if (this.data.totalPrice < this.data.minPrice) {
-            let diff = this.data.minPrice - this.data.totalPrice;
-            return '还差' + diff + '元起送';
-        } else {
-            return '去结算';
-        }
-    },
     //結算
     pay() {
-        if (this.data.totalPrice < this.data.minPrice) {
+        if (this.data.totalPrice <= 0) {
             return;
         }
         // window.alert('支付' + this.totalPrice + '元');
@@ -210,11 +168,6 @@ Page({
     onLoad: function(option) {
         console.log(option);
         let that = this;
-        // 页面初始化 option为页面跳转所带来的参数
-        this.setData({
-            payDesc: this.payDesc()
-        });
-
         wx.request({
             url: app.globalData.baseUrl,
             method: 'post',
@@ -234,6 +187,7 @@ Page({
                 let [supplier] = res.data.data.supplier;
                 for (let dishcategory of supplier.dishcategories) {
                     for (let dish of dishcategory.dishs) {
+                        dish.quantity = 0;
                         for (let dishattr of dish.dishattrs) {
                             //只能在这里格式化
                             dishattr.pricetext = util.formatDecimal(dishattr.price);

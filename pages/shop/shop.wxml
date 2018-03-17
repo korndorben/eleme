@@ -24,7 +24,7 @@
     <view class="dishs">
         <view class="menu-wrapper">
             <scroll-view scroll-y="true">
-                <view wx:for="{{supplier.dishcategories}}" class="menu-item border-1px {{toViewIndex==index ? 'active':''}}" bindtap="selectMenu" wx:for-index="dishcategoryindex" data-dishcategoryindex="{{dishcategoryindex}}">
+                <view wx:for="{{supplier.dishcategories}}" class="menu-item border-1px {{toViewIndex==index ? 'active':''}}" bindtap="selectMenu" wx:for-index="dishcategoryindex">
                     <view class="text">
                         {{item.name}}
                     </view>
@@ -32,12 +32,12 @@
             </scroll-view>
         </view>
         <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="dishs-wrapper">
-            <view class="dish-list dish-list-hook" wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" wx:for-index="dishcategoryid">
+            <view class="dish-list dish-list-hook" wx:for="{{supplier.dishcategories}}" wx:for-item="dishcategory" wx:for-index="dishcategoryindex">
                 <!--分类-->
                 <view id="order{{dishcategoryid}}" class="title">
-                    {{dishcategory.name}} {{dishcategoryindex}}
+                    {{dishcategory.name}}
                 </view>
-                <view wx:for="{{dishcategory.dishs}}" class="dish-item" wx:for-item="dish" wx:for-index="dishid">
+                <view wx:for="{{dishcategory.dishs}}" class="dish-item" wx:for-item="dish" wx:for-index="dishindex">
                     <view class="icon">
                         <image src="{{dish.dishimage}}" style="width: 57px;height: 57px"></image>
                     </view>
@@ -54,14 +54,14 @@
                         <!--cartControl-->
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
-                                <view name="fade" wx:if="{{dish.dishattrs.length==1}}">
-                                    <view class="cart-decrease" wx:if="{{dish.num > 0}}" data-dishid="{{dishid}}" data-dishcategoryid="{{dishcategoryid}}" catchtap="decreaseCart">
+                                <view name="fade" wx:if="{{dish.dishattrs.length<=1}}">
+                                    <view class="cart-decrease" wx:if="{{selectFoods[dish.id]}}" data-dish="{{dish}}" catchtap="decreaseCart">
                                         <view class="inner iconfont icon-jian"></view>
                                     </view>
-                                    <view class="cart-count" wx:if="{{dish.num > 0 }}">{{dish.num}}</view>
-                                    <view class=" iconfont icon-jia cart-add " data-dishid="{{dishid}}" data-dishcategoryid="{{dishcategoryid}}" catchtap="addCart"></view>
+                                    <view class="cart-count" wx:if="{{selectFoods[dish.id]}}">{{selectFoods[dish.id]['quantity']}}</view>
+                                    <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart"></view>
                                 </view>
-                                 <view wx:else name="fade">
+                                 <view name="fade" wx:if="{{dish.dishattrs.length>1}}">
                                     <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">选规格</button>
                                 </view>
                             </view>
@@ -127,13 +127,13 @@
                     </view>
                     <view class="num" wx:if="{{totalCount> 0}}">{{totalCount}}</view>
                 </view>
-                <view class="price highlight">￥{{totalPrice}}</view>
-                <view class="desc">另需配送费￥{{deliveryPrice}}元</view>
+                <view class="price highlight">{{totalPriceDescription}}</view>
+                <view class="desc"></view>
             </view>
-            <view class="content-right" catchtap="pay">
+            <view class="content-right" catchtap="pay" wx:if="{{totalPrice>0}}">
                 <navigator url="/pages/details/index">
                     <view class="pay enough">
-                        {{payDesc}}
+                    去结算
                     </view>
                 </navigator>
             </view>
