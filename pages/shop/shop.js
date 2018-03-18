@@ -125,9 +125,6 @@ Page({
         // window.alert('支付' + this.totalPrice + '元');
         //确认支付逻辑
         let resultType = "success";
-        wx.redirectTo({
-            url: '../goods/pay/pay?resultType=' + resultType
-        })
     },
     //彈起購物車
     toggleCartShow: function() {

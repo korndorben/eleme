@@ -1,72 +1,80 @@
-.active{
-    background:#fff;
+.active {
+    background: #fff;
 }
 
 /* pages/goodss/goodss.wxss */
 
-.choosespecwindowcontainer{
-    width:100%;
-    height:100%;
-    background-color:#000;
-    position:fixed;
-    top:0;
-    left:0;
-    opacity:0.5;
-    z-index:100;
+.choosespecwindowcontainer {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: 100;
 }
-.choosespecwindow{
-    width:80%;
-    background-color:#fff;
-    position:fixed;
-    top:20%;
-    left:10%;
-    opacity:1;
-    z-index:200;
-    padding:0;
-    margin:0;
+
+.choosespecwindow {
+    width: 80%;
+    background-color: #fff;
+    position: fixed;
+    top: 20%;
+    left: 10%;
+    opacity: 1;
+    z-index: 200;
+    padding: 0;
+    margin: 0;
     border-radius: 5px;
     font-size: 14px;
 }
-.choosespecwindow .header{
-    padding:10px;
+
+.choosespecwindow .header {
+    padding: 10px;
 }
-.choosespecwindow .content{
-    height:300px;/* 滚动视图 */
+
+.choosespecwindow .content {
+    height: 300px;
+    /* 滚动视图 */
 }
+
 .choosespecwindow .content .tagblock {
     border-bottom: 1px solid #ccc;
 }
-.choosespecwindow .content .tagblock .tagtitle{
-    font-size:14px;
-    padding:10px;
+
+.choosespecwindow .content .tagblock .tagtitle {
+    font-size: 14px;
+    padding: 10px;
     background-color: #f8f8f8;
 }
-.choosespecwindow .content .tagblock .taglist{
-    padding:10px;
+
+.choosespecwindow .content .tagblock .taglist {
+    padding: 10px;
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 }
-.choosespecwindow .content .tagblock .tag{
-    width:20%;
-    border:1px solid #ccc;
-    font-size:12px;
-    padding:5px;
-    margin:5px;
+
+.choosespecwindow .content .tagblock .tag {
+    width: 20%;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    padding: 5px;
+    margin: 5px;
 }
-.choosespecwindow .footer{
-    padding:10px;
+
+.choosespecwindow .footer {
+    padding: 10px;
     display: flex;
     background-color: #f8f8f8;
 }
-.choosespecwindow .footer .choosespec{
-    width:40%;
-    line-height:30px;
-    font-size:12px;
-    height:30px;
+
+.choosespecwindow .footer .choosespec {
+    width: 40%;
+    line-height: 30px;
+    font-size: 12px;
+    height: 30px;
     /* flex:1 */
 }
-
-
 
 .dishs {
     display: flex;
@@ -112,7 +120,6 @@
     background-repeat: no-repeat;
 }
 
-
 .dishs .menu-wrapper .menu-item .text {
     display: table-cell;
     width: 56px;
@@ -124,7 +131,7 @@
 
 .dishs .dishs-wrapper {
     flex: 1;
-    background:#fff;
+    background: #fff;
 }
 
 .dishs .dishs-wrapper .dish-list .title {
@@ -155,8 +162,8 @@
     margin-right: 10px;
 }
 
-.dishs .dishs-wrapper .dish-list .dish-item .icon image{
-    border-radius:5px;
+.dishs .dishs-wrapper .dish-list .dish-item .icon image {
+    border-radius: 5px;
 }
 
 .dishs .dishs-wrapper .dish-list .dish-item .content {
@@ -209,8 +216,8 @@
     bottom: 12px;
 }
 
-
 /* cartControl 样式 */
+
 .dishs .dishs-wrapper .dish-list .dish-item .content .cartControl-wrapper .cartControl {
     font-size: 0;
 }
@@ -262,13 +269,13 @@
     line-height: 18px;
     font-size: 18px;
     vertical-align: top;
-    color:#00A0DC;
+    color: #00A0DC;
 }
+
 .dishs .dishs-wrapper .dish-list .dish-item .content .cartControl-wrapper .cartControl .choosespec {
     line-height: 24px;
     font-size: 12px;
 }
-
 
 /* shopcart 样式 */
 
@@ -483,7 +490,6 @@
     bottom: 6px;
 }
 
-
 /* head */
 
 .header {
@@ -506,14 +512,14 @@
 .header .content-wrapper .avatar image {
     border-radius: 50%;
     width: 64px;
-    height:64px;
-    border:2px solid #fff;
+    height: 64px;
+    border: 2px solid #fff;
 }
 
 .header .content-wrapper .content {
     display: inline-block;
     font-size: 14px;
-    padding-left:1rem;
+    padding-left: 1rem;
 }
 
 .header .content-wrapper .content .title .brand {
@@ -535,6 +541,7 @@
     line-height: 12px;
     font-size: 12px;
 }
+
 .header .background {
     position: absolute;
     top: 0;
@@ -572,15 +579,17 @@
 .tab .tab-item .active {
     color: #f01414;
 }
-.comask{
-    background-color:#000000;
-    width:100%;
-    height:100%;
-    opacity:0.6;
-    position:fixed;
-    top:0;
-    z-index:-1;
+
+.comask {
+    background-color: #000000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    position: fixed;
+    top: 0;
+    z-index: -1;
 }
+
 .list-mask {
     position: fixed;
     top: 0;
@@ -591,6 +600,7 @@
     /*backdrop-filter: blur(10px);*/
     -webkit-backdrop-filter: 1;
     background: #000000;
+    opacity: 0.5;
 }
 
 .list-mask :fade-enter-active, :fade-leave-active {
@@ -603,7 +613,6 @@
     opacity: 0;
     background: rgba(7, 17, 27, 0);
 }
-
 
 /* 字体图标 */
 

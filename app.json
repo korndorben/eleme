@@ -1,14 +1,30 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/shop/shop",
-    "pages/details/index"
-  ],
-  "window":{
-     "navigationBarBackgroundColor": "#ffffff",
-     "navigationBarTextStyle": "black",
-     "navigationBarTitleText": "麻辣面对面测试",
-     "backgroundColor": "#eeeeee",
-     "backgroundTextStyle": "light"
-   }
+    "pages": [
+        "pages/index/index",
+        "pages/shop/shop",
+        "pages/details/index"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "麻辣面对面测试",
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light"
+    },
+    "tabBar": {
+        "color": "#a9b7b7",
+        "selectedColor": "#11cd6e",
+        "borderStyle": "black",
+        "list": [{
+            "selectedIconPath": "images/home_active.png",
+            "iconPath": "images/home.png",
+            "pagePath": "pages/index/index",
+            "text": "首页"
+        }, {
+            "selectedIconPath": "images/account_active.png",
+            "iconPath": "images/account.png",
+            "pagePath": "pages/index/index",
+            "text": "我的"
+        }]
+    }
 }

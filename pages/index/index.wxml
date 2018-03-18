@@ -7,8 +7,8 @@
                     <view class="zan">123</view>
                     <image class="logo" src="{{item.imagepath}}" />
                     <view class="content">
-                        <view class="title">{{item.suppliername}}</view>
-                        <view class="desc">{{item.address1}}</view>
+                        <view class="title">门店名称</view>
+                        <view class="desc">地址</view>
                     </view>
                 </view>
             </navigator>
