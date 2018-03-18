@@ -1,5 +1,7 @@
 {
     "pages": [
+        "pages/confirmorder/index",
+        "pages/my/index",
         "pages/index/index",
         "pages/shop/shop",
         "pages/details/index"
@@ -21,9 +23,14 @@
             "pagePath": "pages/index/index",
             "text": "首页"
         }, {
+            "selectedIconPath": "images/home_active.png",
+            "iconPath": "images/home.png",
+            "pagePath": "pages/confirmorder/index",
+            "text": "确认订单(调试用)"
+        }, {
             "selectedIconPath": "images/account_active.png",
             "iconPath": "images/account.png",
-            "pagePath": "pages/index/index",
+            "pagePath": "pages/my/index",
             "text": "我的"
         }]
     }

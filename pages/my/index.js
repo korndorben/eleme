@@ -14,11 +14,6 @@ Page( {
         isunread: false,
         unreadNum: 2
       }, {
-        icon: '../../images/iconfont-icontuan.png',
-        text: '我的拼团',
-        isunread: true,
-        unreadNum: 1
-      }, {
         icon: '../../images/iconfont-shouhuodizhi.png',
         text: '收货地址管理'
       }, {

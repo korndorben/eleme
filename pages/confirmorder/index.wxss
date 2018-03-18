@@ -1,0 +1,65 @@
+.container{
+    font-weight:300;
+    font-size: 14px;
+    display: flex;
+    width: 100%;
+    padding: 0 5% 5% 5%;
+}
+
+.shopname,
+.products,
+.paymentmethod,
+.eattime,
+.remark{
+    width: 100%;
+}
+
+.shopname{
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    padding:10rpx;
+}
+.products{
+    display: flex;
+    flex-direction: column;
+    padding:10rpx;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30rpx;
+}
+.products .item{
+    display: flex;
+    flex-direction: row;
+    padding:10rpx 0;
+}
+.products .item .name,
+.products .item .quantity,
+.products .item .total
+{
+    flex:1;
+    text-align: right;
+}
+.products .item .name{
+    text-align: left;
+}
+
+.paymentmethod{
+    padding:20rpx 0;
+    border-bottom: 1px solid #eee;
+    display:flex;
+    flex-direction: row;
+}
+.paymentmethod .paymentmethod_title{
+    flex:1;
+}
+.paymentmethod .paymentmethod_options{
+    flex:1;
+    text-align: right;
+}
+.eattime{
+    padding:20rpx 0;
+    border-bottom: 1px solid #eee;
+}
+.remark{
+    padding:20rpx 0;
+    border-bottom: 1px solid #eee;
+}
