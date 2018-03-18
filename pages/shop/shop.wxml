@@ -42,7 +42,7 @@
                         <image src="{{dish.dishimage}}" style="width: 57px;height: 57px"></image>
                     </view>
                     <view class="content">
-                        <view class="name">{{dish.name}} {{dishindex}}</view>
+                        <view class="name">{{dish.name}}</view>
                         <view class="desc">{{dish.intro}}</view>
                         <view class="extra">
                             <text class="count">月售{{dish.dishs}}</text>
@@ -73,53 +73,15 @@
 
 
         <view name="fade">
-            <view class="list-mask" wx:if="{{listShow}}" bindtap="hideList"></view>
+            <view class="list-mask" wx:if="{{cartShowClass=='block'}}" bindtap="toggleCartShow"></view>
         </view>
     </view>
 </view>
-<!--规格选择-->
-<view class="choosespecwindowcontainer" wx:if="{{fold}}">
 
-</view>
-<view class="choosespecwindow" wx:if="{{fold}}">
-    <view class="header">选规格</view>
-    <scroll-view scroll-y class="content">
-        <view class="tagblock">
-            <view class="tagtitle">颜色</view>
-            <view class="taglist">
-                <view class="tag">红色</view>
-                <view class="tag">绿色</view>
-                <view class="tag">蓝色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-            </view>
-        </view>
-        <view class="tagblock">
-            <view class="tagtitle">颜色</view>
-            <view class="taglist">
-                <view class="tag">红色</view>
-                <view class="tag">绿色</view>
-                <view class="tag">蓝色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-                <view class="tag">黑色</view>
-            </view>
-        </view>
-    </scroll-view>
-    <view class="footer">
-        <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="default">关闭</button>
-        <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">加入购物车</button>
-    </view>
-</view>
 <!--shopCart-->
-<view>
+<view class="shopCartContainer">
     <view class="shopCart">
-        <view class="content" bindtap="toggleList">
+        <view class="content" bindtap="toggleCartShow">
             <view class="content-left">
                 <view class="logo-wrapper">
                     <view class="logo highlight">
@@ -130,7 +92,7 @@
                 <view class="price highlight">{{totalPriceDescription}}</view>
                 <view class="desc"></view>
             </view>
-            <view class="content-right" catchtap="pay" wx:if="{{totalPrice>0}}">
+            <view class="content-right" catchtap="pay" wx:if="{{totalPrice}}">
                 <navigator url="/pages/details/index">
                     <view class="pay enough">
                     去结算
@@ -138,26 +100,26 @@
                 </navigator>
             </view>
         </view>
-        <view class="shopcart-list" style="display:{{cartShow}}">
+        <view class="shopcart-list" style="display:{{cartShowClass}}">
             <view class="list-header">
                 <view class="title">购物车</view>
                 <text class="empty" bindtap="empty">清空</text>
             </view>
             <view class="list-content">
-                <view class="shopcart-dish" wx:for="{{carArray}}">
-                    <text class="name">{{item.name}}</text>
-                    <view class="price" wx:if="{{item.num > 0}}">
-                        <span>￥{{item.price*item.num}}</span>
+                <view class="shopcart-dish" wx:for="{{selectFoods}}">
+                    <text class="name">{{item.dish.name}}</text>
+                    <view class="price" wx:if="{{item.quantity}}">
+                        <span>￥{{item.totaldescription}}</span>
                     </view>
 
                     <!--cartControl-->
-                    <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.num > 0}}">
+                    <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.quantity}}">
                         <view class="cartControl" style="width:80px;">
                             <view name="fade">
                                 <view class="cart-decrease" style="display:inline-block;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="decreaseShopCart">
                                     <view class="inner iconfont icon-jian" style="font-size:24px;color:#00A0DC;"></view>
                                 </view>
-                                <view class="cart-count" style="display:inline-block;width:32px;text-align:center;font-size:14px;">{{item.num}}</view>
+                                <view class="cart-count" style="display:inline-block;width:32px;text-align:center;font-size:14px;">{{item.quantity}}</view>
                                 <view class=" iconfont icon-jia cart-add " style="font-size:24px;color:#00A0DC; padding:0;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="addShopCart"></view>
                             </view>
                         </view>

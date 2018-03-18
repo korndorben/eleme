@@ -12,16 +12,20 @@ Page({
         totalPrice: 0, // 总价格
         totalPriceDescription: '',
         totalCount: 0, // 总商品数
-        carArray: [],
-        minPrice: 20, //起送價格
-        payDesc: '',
-        deliveryPrice: 4, //配送費
-        fold: false,
         selectFoods: {},
-        cartShow: 'none',
+        cartShow: false,
+        cartShowClass: 'none',
         status: 0,
-        comask: '',
         supplier: {}
+    },
+    //清空购物车
+    empty: function() {
+        this.setData({
+            totalPrice: 0,
+            totalCount: 0,
+            selectFoods: [],
+        })
+        this.toggleCartShow()
     },
 
     //选择分类
@@ -32,10 +36,6 @@ Page({
             toViewIndex: dishid
         })
         console.log(this.data.toView);
-    },
-    choosespec: function(e) {
-        this.fold = !this.fold;
-        console.log(e.currentTarget.dataset);
     },
 
     //移除商品
@@ -80,9 +80,6 @@ Page({
             })
         }
     },
-    decreaseShopCart: function(e) {
-        this.decreaseCart(e);
-    },
     //添加到购物车
     addCart(e) {
         let dish = e.currentTarget.dataset.dish; //当前菜品
@@ -92,9 +89,12 @@ Page({
                 quantity: 1,
                 dish: dish,
                 dishattr: dish.dishattrs[0],
+                price: dish.dishattrs[0].price,
+                totaldescription: util.formatDecimal(dish.dishattrs[0].price)
             }
         } else {
-            selectFoods[dish.id]['quantity']++
+            selectFoods[dish.id]['quantity'] += 1;
+            selectFoods[dish.id]['totaldescription'] = util.formatDecimal(selectFoods[dish.id]['price'] * selectFoods[dish.id]['quantity'])
         }
 
         let totalPrice = 0;
@@ -127,37 +127,22 @@ Page({
         })
     },
     //彈起購物車
-    toggleList: function() {
-        if (!this.data.totalCount) {
-            return;
-        }
-
+    toggleCartShow: function() {
+        this.data.cartShow = !this.data.cartShow;
         this.setData({
-            fold: !this.data.fold,
+            cartShow: this.data.cartShow,
         })
-        let fold = this.data.fold
-
-        this.cartShow(fold)
-    },
-    toggleMask: function() {
-        if (!this.data.fold) {
-            this.toggleList()
-        }
-    },
-    cartShow: function(fold) {
-        console.log(fold);
-        if (fold == false) {
+        let cartShow = this.data.cartShow
+        console.log(cartShow);
+        if (cartShow) {
             this.setData({
-                cartShow: 'block',
-                comask: 'comask'
+                cartShowClass: 'block',
             })
         } else {
             this.setData({
-                cartShow: 'none',
-                comask: ''
+                cartShowClass: 'none',
             })
         }
-        console.log(this.data.cartShow);
     },
     tabChange: function(e) {
         let showtype = e.target.dataset.type;
