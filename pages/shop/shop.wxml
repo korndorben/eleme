@@ -55,11 +55,11 @@
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
                                 <view name="fade" wx:if="{{dish.dishattrs.length<=1}}">
-                                    <view class="cart-decrease" wx:if="{{selectFoods[dish.id]}}" data-dish="{{dish}}" catchtap="decreaseCart">
+                                    <view class="cart-decrease" wx:if="{{selectFoods[dish.uniquekey]}}" data-dish="{{dish}}" catchtap="decreaseCart1">
                                         <view class="inner iconfont icon-jian"></view>
                                     </view>
-                                    <view class="cart-count" wx:if="{{selectFoods[dish.id]}}">{{selectFoods[dish.id]['quantity']}}</view>
-                                    <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart"></view>
+                                    <view class="cart-count" wx:if="{{selectFoods[dish.uniquekey]}}">{{selectFoods[dish.uniquekey]['quantity']}}</view>
+                                    <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart1"></view>
                                 </view>
                                  <view name="fade" wx:if="{{dish.dishattrs.length>1}}">
                                     <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">选规格</button>
@@ -116,11 +116,11 @@
                     <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.quantity}}">
                         <view class="cartControl" style="width:80px;">
                             <view name="fade">
-                                <view class="cart-decrease" style="display:inline-block;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="decreaseShopCart">
+                                <view class="cart-decrease" style="display:inline-block;" data-item="{{item}}" catchtap="decreaseCart2">
                                     <view class="inner iconfont icon-jian" style="font-size:24px;color:#00A0DC;"></view>
                                 </view>
                                 <view class="cart-count" style="display:inline-block;width:32px;text-align:center;font-size:14px;">{{item.quantity}}</view>
-                                <view class=" iconfont icon-jia cart-add " style="font-size:24px;color:#00A0DC; padding:0;" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="addShopCart"></view>
+                                <view class=" iconfont icon-jia cart-add " style="font-size:24px;color:#00A0DC; padding:0;" data-item="{{item}}" catchtap="addCart2"></view>
                             </view>
                         </view>
                     </view>

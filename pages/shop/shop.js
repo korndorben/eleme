@@ -20,10 +20,11 @@ Page({
     },
     //清空购物车
     empty: function() {
+        this.data.selectFoods = {}
         this.setData({
             totalPrice: 0,
             totalCount: 0,
-            selectFoods: [],
+            selectFoods: this.data.selectFoods,
         })
         this.toggleCartShow()
     },
@@ -38,63 +39,68 @@ Page({
         console.log(this.data.toView);
     },
 
+    decreaseCart1: function(e) {
+        let dish = e.currentTarget.dataset.dish; //当前菜品
+        this.decreaseCart(dish, dish.dishattrs[0])
+    },
+    decreaseCart2: function(e) {
+        let item = e.currentTarget.dataset.item; //当前菜品
+        this.decreaseCart(item.dish, item.dishattr)
+    },
     //移除商品
-    decreaseCart: function(e) {
-        let dish = e.currentTarget.dataset.dish;
-        dish.quantity -= 1;
-        if (dish.quantity <= 0) {
-            dish.quantity = 0
-        }
-        let dishcategoryid = dish.dishcategoryid;
-        let mark = `dishcategory${dishcategoryid}-dish${dish.id}-dishattr${dish.dishattrs[0].id}`
-        let item = this.data.carArray.find(item => item.mark == mark)
-        if (this.data.carArray.length <= 0 || !item) {
+    decreaseCart: function(dish, dishattr) {
+        if (!dish || !dishattr) {
+            //something wrong
             return
         }
-        item.quantity--;
-        if (item.quantity <= 0) {
-            item.quantity = 0
+        let uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
+        let selectFoods = this.data.selectFoods
+        selectFoods[uniquekey]['quantity'] -= 1;
+        selectFoods[uniquekey]['totaldescription'] = util.formatDecimal(selectFoods[uniquekey]['price'] * selectFoods[uniquekey]['quantity'])
+        if (selectFoods[uniquekey]['quantity'] <= 0) {
+            delete selectFoods[uniquekey];
         }
-
+        let totalPrice = 0;
+        let totalCount = 0;
+        for (let key of Object.keys(selectFoods)) {
+            totalCount += selectFoods[key]['quantity']
+            totalPrice += 1 * selectFoods[key]['quantity'] * selectFoods[key]['dishattr']['price']
+        }
         this.setData({
-            carArray: this.data.carArray,
-            supplier: this.data.supplier
+            totalPrice: totalPrice,
+            totalCount: totalCount,
+            selectFoods: selectFoods,
+            totalPriceDescription: '￥' + (totalPrice / 100).toFixed(2)
         })
-        this.calTotalPrice();
-        this.setData({
-            carArray: this.data.carArray,
-            payDesc: this.payDesc()
-        })
-        //关闭弹起
-        let count1 = 0
-        for (let i = 0; i < this.data.carArray.length; i++) {
-            if (this.data.carArray[i].quantity) {
-                count1++;
-            }
-        }
-        //console.log(count1)
-        if (count1 <= 0) {
-            this.setData({
-                cartShow: 'none',
-                comask: ''
-            })
-        }
     },
     //添加到购物车
-    addCart(e) {
+    addCart1(e) {
         let dish = e.currentTarget.dataset.dish; //当前菜品
+        this.addCart(dish, dish.dishattrs[0])
+    },
+    //添加到购物车
+    addCart2(e) {
+        let item = e.currentTarget.dataset.item; //当前菜品
+        this.addCart(item.dish, item.dishattr)
+    },
+    addCart: function(dish, dishattr) {
+        if (!dish || !dishattr) {
+            //something wrong
+            return
+        }
+        let uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
         let selectFoods = this.data.selectFoods
-        if (!selectFoods[dish.id]) {
-            selectFoods[dish.id] = {
+        if (!selectFoods[uniquekey]) {
+            selectFoods[uniquekey] = {
                 quantity: 1,
                 dish: dish,
-                dishattr: dish.dishattrs[0],
-                price: dish.dishattrs[0].price,
-                totaldescription: util.formatDecimal(dish.dishattrs[0].price)
+                dishattr: dishattr,
+                price: dishattr.price,
+                totaldescription: util.formatDecimal(dishattr.price)
             }
         } else {
-            selectFoods[dish.id]['quantity'] += 1;
-            selectFoods[dish.id]['totaldescription'] = util.formatDecimal(selectFoods[dish.id]['price'] * selectFoods[dish.id]['quantity'])
+            selectFoods[uniquekey]['quantity'] += 1;
+            selectFoods[uniquekey]['totaldescription'] = util.formatDecimal(selectFoods[uniquekey]['price'] * selectFoods[uniquekey]['quantity'])
         }
 
         let totalPrice = 0;
@@ -109,9 +115,6 @@ Page({
             selectFoods: selectFoods,
             totalPriceDescription: '￥' + (totalPrice / 100).toFixed(2)
         })
-    },
-    addShopCart: function(e) {
-        this.addCart(e);
     },
 
     //結算
@@ -175,6 +178,8 @@ Page({
                         dish.quantity = 0;
                         for (let dishattr of dish.dishattrs) {
                             //只能在这里格式化
+                            dish.uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
+                            dishattr.uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
                             dishattr.pricetext = util.formatDecimal(dishattr.price);
                         }
                     }
