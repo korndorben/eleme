@@ -1,3 +1,5 @@
+@import './templates/shop-activities.wxss';
+
 .active {
     background: #fff;
 }
@@ -671,33 +673,3 @@
     content: "\e670";
 }
 
-.activities_details {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #262626;
-    z-index: 200;
-    padding: 1.25rem;
-}
-.activities_details .activities_shoptitle {
-    text-align: center;
-    font-size: 36rpx;
-    color: #fff;
-}
-
-.activities_details .activities_list {
-    margin-top: 3rpx;
-    margin-bottom: 2rpx;
-    font-size: .6rem;
-    color: #fff;
-}
-
-.activities_details .activities_list header span {
-    font-size: 1rpx;
-    color: #fff;
-    border: .025rpx solid #555;
-    padding: .2fpx .4fpx;
-    border-radius: .5rpx;
-}
