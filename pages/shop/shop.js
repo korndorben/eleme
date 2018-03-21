@@ -16,6 +16,7 @@ Page({
         cartShow: false,
         cartShowClass: 'none',
         status: 0,
+        showActivities: false,
         supplier: {}
     },
     //清空购物车

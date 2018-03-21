@@ -6,56 +6,53 @@
   bottom: 0;
   background-color: #262626;
   z-index: 200;
-  padding: 1.25rem;
+  padding: 56rpx;
 }
 .activities_details .activities_shoptitle {
   text-align: center;
   font-size: 36rpx;
+  font-weight: bold;
   color: #fff;
 }
 
 .activities_subtitle_container {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 45rpx;
 }
 .activities_details .activities_list, .activities_shopinfo {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: .6rem;
+  margin-top: 68rpx;
+  margin-bottom: 45rpx;
+  font-size: 27rpx;
   color: #fff;
 }
 
 .activities_details .activities_subtitle {
   display: inline-block;
-  font-size: .5rem;
+  font-size: 24rpx;
   color: #fff;
-  border: .025rem solid #555;
-  padding: .2rem .4rem;
-  border-radius: .5rem;
+  border: 1rpx solid #555;
+  padding: 9rpx 18rpx;
+  border-radius: 23rpx;
 }
 
 .activities_details .activities_list_item {
   border-bottom: 1px dashed #777;
-  padding: .14rem;
+  padding: 6rpx;
 }
 
-.activities_details .activities_list_item .activities_icon{
-  padding: 0 .02rem;
+.activities_details .activities_list_item .activities_icon {
+  padding: 0 1rpx;
   display: inline-block;
-  border: .025rem solid #fff;
-  border-radius: .1rem;
+  border: 1rpx solid #fff;
+  border-radius: 5rpx;
 }
 
-
-.activities_details .activities_list_item .activities_icon{
-  padding: 0 .02rem;
+.activities_details .activities_list_item .activitytitle {
   display: inline-block;
-  border: .025rem solid #fff;
-  border-radius: .1rem;
 }
 
 .activities_details .activities_intro {
-  line-height: .7rem;
-  font-size: .5rem;
+  line-height: 32rpx1;
+  font-size: 24rpx;
   color: #fff;
 }

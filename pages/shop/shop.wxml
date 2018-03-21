@@ -131,4 +131,4 @@
     </view>
 </view>
 
-<template is="shop-activities" data="{{supplier: supplier}}" />
+<template is="shop-activities" wx:if="{{showActivities}}" data="{{supplier: supplier}}" />

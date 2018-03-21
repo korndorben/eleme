@@ -6,12 +6,12 @@
                 <view class="activities_subtitle">优惠信息</view>
             </view>
             <view class="activities_list_item">
-                <span class="activities_icon">3</span>
-                <span class="activitytitle">#1 38</span>
+                <view class="activities_icon">3</view>
+                <view class="activitytitle">#1 38</view>
             </view>
             <view class="activities_list_item">
-                <span class="activities_icon">3</span>
-                <span class="activitytitle">#1 38</span>
+                <view class="activities_icon">3</view>
+                <view class="activitytitle">#1 38</view>
             </view>
         </view>
         <view class="activities_shopinfo">
