@@ -1,17 +1,38 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="list">
-        <block>
-            <navigator class="navigator" url="/pages/shop/shop?supplierid=1">
-                <view class="supplier">
-                    <view class="zan">123</view>
-                    <image class="logo" src="{{item.imagepath}}" />
-                    <view class="content">
-                        <view class="title">门店名称</view>
-                        <view class="desc">地址</view>
-                    </view>
-                </view>
-            </navigator>
-        </block>
+    <view class="logo">
+        <image src="{{supplier.logo}}"></image>
+    </view>
+    <view class="mr line1">
+        <view class="mealorder col1">
+            <image class="icon" src="/images/meal.png"></image>
+            <view class="content">
+                <view class="title">店内点餐</view>
+                <view class="desc">菜单打开速度很快</view>
+            </view>
+        </view>
+        <view class="recharge col2">
+            <image class="icon" src="/images/account.png"></image>
+            <view class="content">
+                <view class="title">会员</view>
+                <view class="desc">办会员只为看见你</view>
+            </view>
+        </view>
+    </view>
+    <view class="mr line2">
+        <view class="account col1">
+            <image class="icon" src="/images/set.png"></image>
+            <view class="content">
+                <view class="title">我的地盘</view>
+                <view class="desc">里边有一个订单列表</view>
+            </view>
+        </view>
+        <view class="wifi col2">
+            <image class="icon" src="/images/wifi.png"></image>
+            <view class="content">
+                <view class="title">免费wifi</view>
+                <view class="desc">不仅可以用来点餐</view>
+            </view>
+        </view>
     </view>
 </view>
