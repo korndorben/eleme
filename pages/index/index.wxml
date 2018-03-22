@@ -4,7 +4,7 @@
         <image src="{{supplier.logo}}"></image>
     </view>
     <view class="mr line1">
-        <view class="mealorder col1">
+        <view class="mealorder col1" bindtap="onGoShop">
             <image class="icon" src="/images/meal.png"></image>
             <view class="content">
                 <view class="title">店内点餐</view>
