@@ -2,6 +2,7 @@
     display: flex;
     height: 100%;
     width: 100%;
+    padding:10px;
 }
 
 .logo, .mr {
@@ -11,15 +12,20 @@
 }
 .logo image{
     width: 100%;
-    
-}
 
+}
+.line{
+    height:10px;
+}
 .mealorder, .recharge, .account, .wifi {
     flex: 1;
     display: flex;
     padding: 20px;
     color: #fefefe;
     align-items: center;
+}
+.content{
+    flex:1;
 }
 .icon{
     width: 30px;
@@ -41,11 +47,11 @@
 }
 
 .mr .title{
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 300;
 }
 .mr .desc{
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 300;
 }
 .line1{

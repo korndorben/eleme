@@ -93,11 +93,9 @@
                 <view class="desc"></view>
             </view>
             <view class="content-right" catchtap="pay" wx:if="{{totalPrice}}">
-                <navigator url="/pages/details/index">
-                    <view class="pay enough">
-                    去结算
-                    </view>
-                </navigator>
+                <view class="pay enough">
+                    去结算1
+                </view>
             </view>
         </view>
         <view class="shopcart-list" style="display:{{cartShowClass}}">

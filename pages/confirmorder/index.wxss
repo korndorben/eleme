@@ -1,65 +1,83 @@
-.container{
-    font-weight:300;
+.container {
+    font-weight: 300;
     font-size: 14px;
     display: flex;
     width: 100%;
     padding: 0 5% 5% 5%;
 }
 
-.shopname,
-.products,
-.paymentmethod,
-.eattime,
-.remark{
+.shopname, .products, .paymentmethod, .eattime, .remark, .control {
     width: 100%;
 }
 
-.shopname{
+.shopname {
     font-size: 16px;
     border-bottom: 1px solid #eee;
-    padding:10rpx;
+    padding: 10rpx;
 }
-.products{
+
+.products {
     display: flex;
     flex-direction: column;
-    padding:10rpx;
+    padding: 10rpx;
     border-bottom: 1px solid #eee;
     margin-bottom: 30rpx;
 }
-.products .item{
+
+.products .item {
     display: flex;
     flex-direction: row;
-    padding:10rpx 0;
+    padding: 10rpx 0;
 }
-.products .item .name,
-.products .item .quantity,
-.products .item .total
-{
-    flex:1;
+
+.products .item .name, .products .item .quantity, .products .item .total {
+    flex: 1;
     text-align: right;
 }
-.products .item .name{
+
+.products .item .name {
     text-align: left;
 }
 
-.paymentmethod{
-    padding:20rpx 0;
+.paymentmethod {
+    padding: 20rpx 0;
     border-bottom: 1px solid #eee;
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
-.paymentmethod .paymentmethod_title{
-    flex:1;
+
+.paymentmethod .paymentmethod_title {
+    flex: 1;
 }
-.paymentmethod .paymentmethod_options{
-    flex:1;
+
+.paymentmethod .paymentmethod_options {
+    flex: 1;
     text-align: right;
 }
-.eattime{
-    padding:20rpx 0;
+
+.eattime {
+    padding: 20rpx 0;
     border-bottom: 1px solid #eee;
 }
-.remark{
-    padding:20rpx 0;
+
+.remark {
+    padding: 20rpx 0;
     border-bottom: 1px solid #eee;
+    display: flex;
+}
+
+.remark textarea {
+    wdith: 100%;
+    flex: 1;
+}
+
+.control {
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    width: 90%;
+}
+
+.control .dine {
+    flex:1;
 }

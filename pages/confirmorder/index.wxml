@@ -32,10 +32,26 @@
             </view>
         </picker>
     </view>
-    <view class="eattime">
-        用餐时间
+    <view class="paymentmethod">
+        <view class="paymentmethod_title">用餐方式</view>
+        <picker class="paymentmethod_options" bindchange="bindDineModeChange" value="{{dinemodeindex}}" range="{{dinemodes}}">
+            <view class="picker">
+                {{dinemodes[dinemodeindex]}} >
+            </view>
+        </picker>
+    </view>
+    <view class="paymentmethod">
+        <view class="paymentmethod_title">用餐时间</view>
+        <picker class="paymentmethod_options" bindchange="bindEattimeChange" value="{{eattimeindex}}" range="{{eattimes}}">
+            <view class="picker">
+                {{eattimes[eattimeindex]}} >
+            </view>
+        </picker>
     </view>
     <view class="remark">
-        备注
+        <textarea bindblur="bindTextAreaBlur" auto-height placeholder="备注" />
+    </view>
+    <view class="control">
+        <button class="dine" type="primary" loading="{{loading}}" bindtap="primary"> 提交订单 </button>
     </view>
 </view>

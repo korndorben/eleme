@@ -32,6 +32,6 @@ Page({
     onGoShop(e) {
         wx.navigateTo({
             url: '/pages/shop/shop?supplierid=1',
-        });  
+        });
     }
 })

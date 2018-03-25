@@ -119,13 +119,12 @@ Page({
     },
 
     //結算
-    pay() {
-        if (this.data.totalPrice <= 0) {
-            return;
-        }
-        // window.alert('支付' + this.totalPrice + '元');
-        //确认支付逻辑
-        let resultType = "success";
+    pay(e) {
+        console.log('123');
+        console.log(e);
+        wx.navigateTo({
+            url: '/pages/confirmorder/index',
+        });
     },
     //彈起購物車
     toggleCartShow: function() {
