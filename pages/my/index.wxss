@@ -1,89 +1,58 @@
-/**index.wxss**/
 .container {
+    display: flex;
     font-weight: 300;
 }
 
-.info_list {
-    padding: 5%;
-    width: 90%;
-}
-
-.userinfo {
-    padding: 30rpx;
-    display: flex;
-    flex-direction: row;
-    background: rgb(42, 128, 185);
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
 .userinfo-avatar {
-    width: 128rpx;
-    height: 128rpx;
+    border: 1px solid #fff;
     border-radius: 50%;
-    border: 2px solid #fff;
+    width: 30%;
+}
+.userinfo-nickname{
+    padding: 10px;
+}
+.userinfo-desc{
+    padding: 10px;
+    font-size: 12px;
 }
 
-.userinfo-nickname {
-    color: #fff;
-    padding: 30rpx;
-}
-
-.info_list {
-}
-
-.weui_cell {
-    position: relative;
+.userinfo-assets {
     display: flex;
-    padding: 15px;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    border-bottom: 1px solid #dadada;
-}
-
-.weui_cell_hd {
-    display: inline-block;
-    width: 20px;
-    margin-right: 5px;
-}
-
-.weui_cell_hd image {
     width: 100%;
-    height: 20px;
-    vertical-align: -2px;
+    font-size: 13px;
+    background-color: rgb(100,140,200);
+    color:rgb(255,255,255);
+}
+.as1{
+    padding-top: 20px;
+}
+.as2{
+    padding-bottom: 20px;
 }
 
-.weui_cell_bd {
-    display: inline-block;
-}
-
-.weui_cell_bd_p {
-    font-size: 14px;
-    color: #939393;
-}
-
-.badge {
-    position: absolute;
-    top: 18px;
-    right: 40px;
-    width: 15px;
-    height: 15px;
-    line-height: 15px;
-    background: #ff0000;
-    color: #fff;
-    border-radius: 50%;
+.userinfo-assets .balance, .userinfo-assets .integral, .userinfo-assets .level {
+    flex: 1;
     text-align: center;
-    font-size: 8px;
+}
+.userinfo-assets .balance, .userinfo-assets .integral {
+    border-right: 1px solid rgb(230,230,230);
 }
 
-.with_arrow {
-    position: absolute;
-    top: 18px;
-    right: 15px;
-    width: 15px;
-    height: 15px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+
+.list{
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+}
+ .title{
+    font-size: 16px;
+    font-weight: 300;
+}
+ .desc{
+    font-size: 12px;
+    font-weight: 300;
+}
+.account{
+    /* background-color: rgb(180,120,200); */
+    padding: 20px;
 }

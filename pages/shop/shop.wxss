@@ -4,6 +4,10 @@
     background: #fff;
 }
 
+.header,.dishs,.shopCartContainer{
+    font-weight: 300;
+}
+
 /* pages/goodss/goodss.wxss */
 
 .choosespecwindowcontainer {
@@ -388,9 +392,8 @@
     height: 48px;
     line-height: 48px;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.4);
-    font-weight: 700;
     background: #2b333b;
 }
 
@@ -672,4 +675,3 @@
 .icon-weibiaoti6-copy:before {
     content: "\e670";
 }
-

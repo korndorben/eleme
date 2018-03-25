@@ -3,7 +3,8 @@
 var app = getApp()
 Page({
     data: {
-        supplier:{}
+        supplier: {},
+        perfects: '/images/perfect0.png'
     },
 
     onLoad: function() {
@@ -27,6 +28,11 @@ Page({
                     supplier: supplier
                 });
             }
+        })
+    },
+    onperfect: function(e) {
+        this.setData({
+            perfects: '/images/perfect1.png'
         })
     },
     onGoShop(e) {

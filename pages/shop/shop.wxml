@@ -94,7 +94,7 @@
             </view>
             <view class="content-right" catchtap="pay" wx:if="{{totalPrice}}">
                 <view class="pay enough">
-                    去结算1
+                    去结算
                 </view>
             </view>
         </view>

@@ -1,11 +1,10 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="logo">
-        <image src="{{supplier.logo}}"></image>
-    </view>
-    <view class="line">
-
-    </view>
+    <cover-view class="headcontainer">
+        <cover-image class="favorities" bindtap="onperfect" mode="widthFix" src="{{perfects}}" />
+        <cover-image class="logo" mode="widthFix" src="{{supplier.logo}}" />
+        <!-- <cover-view class="addr">{{supplier.address}}</cover-view> -->
+    </cover-view>
     <view class="mr line1">
         <view class="mealorder col1" bindtap="onGoShop">
             <view class="content">
@@ -25,8 +24,8 @@
     <view class="mr line2">
         <view class="account col1">
             <view class="content">
-                <view class="title">我的地盘</view>
-                <view class="desc">里边有一个订单列表</view>
+                <view class="title">我的主页</view>
+                <view class="desc">我的主页</view>
             </view>
             <image class="icon" src="/images/set.png"></image>
         </view>

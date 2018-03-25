@@ -2,7 +2,6 @@ var app = getApp()
 Page( {
   data: {
     userInfo: {},
-    projectSource: 'https://github.com/liuxuanqiang/wechat-weapp-mall',
     userListInfo: [ {
       icon: '../../images/iconfont-dingdan.png',
       text: '我的订单',

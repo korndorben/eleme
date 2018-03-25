@@ -1,19 +1,49 @@
 <!--index.wxml-->
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="info_list">
-    <block wx:for="{{userListInfo}}">
-        <view class="weui_cell">
-            <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
-            <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> {{item.text}} </view>
-            </view>
-            <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
-            <view class="with_arrow"></view>
+    <image mode="widthFix" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <view class="userinfo-nickname">
+        张保坤
+    </view>
+    <view class="userinfo-assets as1">
+        <view class="balance">
+            余额
         </view>
-    </block>
-  </view>
+        <view class="integral">
+            积分
+        </view>
+        <view class="level">
+            等级
+        </view>
+    </view>
+    <view class="userinfo-assets as2">
+        <view class="balance">
+            0.00元
+        </view>
+        <view class="integral">
+            1分
+        </view>
+        <view class="level">
+            level1
+        </view>
+    </view>
+    <view class="list">
+        <view class="account">
+            <view class="content">
+                <view class="title">余额明细</view>
+                <view class="desc">您最近七天没有订单</view>
+            </view>
+        </view>
+        <view class="account">
+            <view class="content">
+                <view class="title">积分变动</view>
+                <view class="desc">您最近七天没有订单</view>
+            </view>
+        </view>
+        <view class="account">
+            <view class="content">
+                <view class="title">地址管理</view>
+                <view class="desc">您还没有填写地址</view>
+            </view>
+        </view>
+    </view>
 </view>
