@@ -12,7 +12,7 @@ Page({
         totalPrice: 0, // 总价格
         totalPriceDescription: '',
         totalCount: 0, // 总商品数
-        selectFoods: {},
+        selection: {},
         cartShow: false,
         cartShowClass: 'none',
         status: 0,
@@ -21,11 +21,11 @@ Page({
     },
     //清空购物车
     empty: function() {
-        this.data.selectFoods = {}
+        this.data.selection = {}
         this.setData({
             totalPrice: 0,
             totalCount: 0,
-            selectFoods: this.data.selectFoods,
+            selection: this.data.selection,
         })
         this.toggleCartShow()
     },
@@ -55,22 +55,22 @@ Page({
             return
         }
         let uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
-        let selectFoods = this.data.selectFoods
-        selectFoods[uniquekey]['quantity'] -= 1;
-        selectFoods[uniquekey]['totaldescription'] = util.formatDecimal(selectFoods[uniquekey]['price'] * selectFoods[uniquekey]['quantity'])
-        if (selectFoods[uniquekey]['quantity'] <= 0) {
-            delete selectFoods[uniquekey];
+        let selection = this.data.selection
+        selection[uniquekey]['quantity'] -= 1;
+        selection[uniquekey]['totaldescription'] = util.formatDecimal(selection[uniquekey]['price'] * selection[uniquekey]['quantity'])
+        if (selection[uniquekey]['quantity'] <= 0) {
+            delete selection[uniquekey];
         }
         let totalPrice = 0;
         let totalCount = 0;
-        for (let key of Object.keys(selectFoods)) {
-            totalCount += selectFoods[key]['quantity']
-            totalPrice += 1 * selectFoods[key]['quantity'] * selectFoods[key]['dishattr']['price']
+        for (let key of Object.keys(selection)) {
+            totalCount += selection[key]['quantity']
+            totalPrice += 1 * selection[key]['quantity'] * selection[key]['dishattr']['price']
         }
         this.setData({
             totalPrice: totalPrice,
             totalCount: totalCount,
-            selectFoods: selectFoods,
+            selection: selection,
             totalPriceDescription: '￥' + (totalPrice / 100).toFixed(2)
         })
     },
@@ -90,9 +90,9 @@ Page({
             return
         }
         let uniquekey = `dishid${dish.id},dishattrid${dishattr.id}`
-        let selectFoods = this.data.selectFoods
-        if (!selectFoods[uniquekey]) {
-            selectFoods[uniquekey] = {
+        let selection = this.data.selection
+        if (!selection[uniquekey]) {
+            selection[uniquekey] = {
                 quantity: 1,
                 dish: dish,
                 dishattr: dishattr,
@@ -100,28 +100,34 @@ Page({
                 totaldescription: util.formatDecimal(dishattr.price)
             }
         } else {
-            selectFoods[uniquekey]['quantity'] += 1;
-            selectFoods[uniquekey]['totaldescription'] = util.formatDecimal(selectFoods[uniquekey]['price'] * selectFoods[uniquekey]['quantity'])
+            selection[uniquekey]['quantity'] += 1;
+            selection[uniquekey]['totaldescription'] = util.formatDecimal(selection[uniquekey]['price'] * selection[uniquekey]['quantity'])
         }
 
         let totalPrice = 0;
         let totalCount = 0;
-        for (let key of Object.keys(selectFoods)) {
-            totalCount += selectFoods[key]['quantity']
-            totalPrice += 1 * selectFoods[key]['quantity'] * selectFoods[key]['dishattr']['price']
+        for (let key of Object.keys(selection)) {
+            totalCount += selection[key]['quantity']
+            totalPrice += 1 * selection[key]['quantity'] * selection[key]['dishattr']['price']
         }
         this.setData({
             totalPrice: totalPrice,
             totalCount: totalCount,
-            selectFoods: selectFoods,
+            selection: selection,
             totalPriceDescription: '￥' + (totalPrice / 100).toFixed(2)
         })
     },
 
     //結算
     pay(e) {
-        console.log('123');
-        console.log(e);
+        wx.setStorage({
+            key: `shoppingcart`,
+            data: {
+                selection: this.data.selection,
+                totalPrice: this.data.totalPrice,
+                totalPriceDescription: this.data.totalPriceDescription,
+            }
+        })
         wx.navigateTo({
             url: '/pages/confirmorder/index',
         });
@@ -151,8 +157,7 @@ Page({
         });
     },
     onLoad: function(option) {
-        console.log(option);
-        let that = this;
+        let self = this;
         wx.request({
             url: app.globalData.baseUrl,
             method: 'post',
@@ -168,7 +173,6 @@ Page({
                 'Accept': 'application/json'
             },
             success: function(res) {
-                console.log(res)
                 let [supplier] = res.data.data.supplier;
                 for (let dishcategory of supplier.dishcategories) {
                     for (let dish of dishcategory.dishs) {
@@ -181,7 +185,7 @@ Page({
                         }
                     }
                 }
-                that.setData({
+                self.setData({
                     supplier: supplier
                 });
             }

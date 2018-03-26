@@ -55,10 +55,10 @@
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
                                 <view name="fade" wx:if="{{dish.dishattrs.length<=1}}">
-                                    <view class="cart-decrease" wx:if="{{selectFoods[dish.uniquekey]}}" data-dish="{{dish}}" catchtap="decreaseCart1">
+                                    <view class="cart-decrease" wx:if="{{selection[dish.uniquekey]}}" data-dish="{{dish}}" catchtap="decreaseCart1">
                                         <view class="inner iconfont icon-jian"></view>
                                     </view>
-                                    <view class="cart-count" wx:if="{{selectFoods[dish.uniquekey]}}">{{selectFoods[dish.uniquekey]['quantity']}}</view>
+                                    <view class="cart-count" wx:if="{{selection[dish.uniquekey]}}">{{selection[dish.uniquekey]['quantity']}}</view>
                                     <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart1"></view>
                                 </view>
                                  <view name="fade" wx:if="{{dish.dishattrs.length>1}}">
@@ -104,7 +104,7 @@
                 <text class="empty" bindtap="empty">清空</text>
             </view>
             <view class="list-content">
-                <view class="shopcart-dish" wx:for="{{selectFoods}}">
+                <view class="shopcart-dish" wx:for="{{selection}}">
                     <text class="name">{{item.dish.name}}</text>
                     <view class="price" wx:if="{{item.quantity}}">
                         <span>￥{{item.totaldescription}}</span>

@@ -8,20 +8,15 @@
             <view class="quantity">数量</view>
             <view class="total">小计</view>
         </view>
-        <view class="item">
-            <view class="name">普通小菜1</view>
-            <view class="quantity">￥1.00 x 10</view>
-            <view class="total">￥1.00</view>
-        </view>
-        <view class="item">
-            <view class="name">普通小菜2</view>
-            <view class="quantity">￥1.00 x 10</view>
-            <view class="total">￥1.00</view>
+        <view class="item" wx:for="{{shoppingcart.selection}}">
+            <view class="name">{{item.dish.name}}</view>
+            <view class="quantity">￥{{item.dishattr.pricetext}} x {{item.quantity}}</view>
+            <view class="total">￥{{item.totaldescription}}</view>
         </view>
         <view class="item">
             <view class="name"></view>
             <view class="quantity">订单合计</view>
-            <view class="total">￥1.00</view>
+            <view class="total">{{shoppingcart.totalPriceDescription}}</view>
         </view>
     </view>
     <view class="paymentmethod">

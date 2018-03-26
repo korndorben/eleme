@@ -6,7 +6,12 @@ Page({
         eattimeindex: 0,
         eattimes: [],
         dinemodes: ['店内用餐', '打包带走(产生打包费用)'],
-        dinemodeindex: 0
+        dinemodeindex: 0,
+        shoppingcart: {
+            selection: {},
+            totalPrice: 0,
+            totalPriceDescription: ''
+        }
     },
     bindPickerChange: function(e) {
         this.setData({
@@ -32,7 +37,18 @@ Page({
         });
     },
     onLoad: function(option) {
-        this.ppeattime()
+        let self = this
+        self.ppeattime()
+        wx.getStorage({
+            key: `shoppingcart`,
+            success: function(res) {
+                console.log('res.data');
+                console.log(res.data);
+                self.setData({
+                    shoppingcart: res.data
+                })
+            }
+        })
     },
     ppeattime: function() {
         let self = this
