@@ -1,48 +1,74 @@
 <include src="../components/head.wxml"/>
 <view class="container">
-    <view class="products">
-        <view class="item">
-            <view class="name">商品</view>
-            <view class="quantity">数量</view>
-            <view class="total">小计</view>
-        </view>
-        <view class="item" wx:for="{{shoppingcart.selection}}">
-            <view class="name">{{item.dish.name}}</view>
-            <view class="quantity">￥{{item.dishattr.pricetext}} x {{item.quantity}}</view>
-            <view class="total">￥{{item.totaldescription}}</view>
-        </view>
-        <view class="item">
-            <view class="name"></view>
-            <view class="quantity">订单合计</view>
-            <view class="total">{{shoppingcart.totalPriceDescription}}</view>
-        </view>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">支付方式</view>
-        <picker class="paymentmethod_options" bindchange="bindPickerChange" value="{{paymentmethodtype}}" range="{{paymentmethods}}">
-            <view class="picker">
-                {{paymentmethods[paymentmethodtype]}} >
+    <view class="block">
+        <view class="products">
+            <view class="item">
+                <view class="name">商品</view>
+                <view class="quantity">数量</view>
+                <view class="total">小计</view>
             </view>
-        </picker>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">用餐方式</view>
-        <picker class="paymentmethod_options" bindchange="bindDineModeChange" value="{{dinemodeindex}}" range="{{dinemodes}}">
-            <view class="picker">
-                {{dinemodes[dinemodeindex]}} >
+            <view class="item" wx:for="{{shoppingcart.selection}}">
+                <view class="name">{{item.dish.name}}</view>
+                <view class="quantity">￥{{item.dishattr.pricetext}} x {{item.quantity}}</view>
+                <view class="total">￥{{item.totaldescription}}</view>
             </view>
-        </picker>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">用餐时间</view>
-        <picker class="paymentmethod_options" bindchange="bindEattimeChange" value="{{eattimeindex}}" range="{{eattimes}}">
-            <view class="picker">
-                {{eattimes[eattimeindex]}} >
+            <view class="item last">
+                <view class="name"></view>
+                <view class="quantity">订单合计</view>
+                <view class="total">{{shoppingcart.totalPriceDescription}}</view>
             </view>
-        </picker>
+        </view>
     </view>
-    <view class="remark">
-        <textarea bindblur="bindTextAreaBlur" auto-height placeholder="备注" />
+    <view class="block forcoding">
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">
+            <image class="icon" src="/images/clock.png" mode="widthFix" binderror="" bindload=""></image>
+                <view class="text">
+                    用餐时间
+                </view>
+            </view>
+            <picker class="paymentmethod_options" bindchange="bindEattimeChange" value="{{eattimeindex}}" range="{{eattimes}}">
+                <view class="picker">
+                    {{eattimes[eattimeindex]}} >
+                </view>
+            </picker>
+        </view>
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">
+                <view class="text">
+                    支付方式
+                </view>
+            </view>
+            <picker class="paymentmethod_options" bindchange="bindPickerChange" value="{{paymentmethodtype}}" range="{{paymentmethods}}">
+                <view class="picker">
+                    {{paymentmethods[paymentmethodtype]}} >
+                </view>
+            </picker>
+        </view>
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">
+                <view class="text">
+                    用餐方式
+                </view>
+            </view>
+            <picker class="paymentmethod_options" bindchange="bindDineModeChange" value="{{dinemodeindex}}" range="{{dinemodes}}">
+                <view class="picker">
+                    {{dinemodes[dinemodeindex]}} >
+                </view>
+            </picker>
+        </view>
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">用餐人数(预留桌位)</view>
+            <picker class="paymentmethod_options" bindchange="bindDeskChange" value="{{deskindex}}" range="{{desks}}">
+                <view class="picker">
+                    {{desks[deskindex]}} >
+                </view>
+            </picker>
+        </view>
+
+        <view class="paymentmethod remark">
+            <textarea bindblur="bindTextAreaBlur" auto-height placeholder="忌口、备注等" />
+        </view>
     </view>
     <view class="control">
         <button class="dine" type="primary" loading="{{loading}}" bindtap="saveorder"> 提交订单 </button>

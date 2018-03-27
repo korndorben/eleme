@@ -7,6 +7,8 @@ Page({
         eattimes: [],
         dinemodes: ['店内用餐', '打包带走(产生打包费用)'],
         dinemodeindex: 0,
+        desks: ['一人','双人桌','四人桌','八人桌'],
+        deskindex: 0,
         shoppingcart: {
             selection: {},
             totalPrice: 0,
@@ -27,6 +29,11 @@ Page({
     bindEattimeChange: function(e) {
         this.setData({
             eattimeindex: e.detail.value
+        })
+    },
+    bindDeskChange: function(e) {
+        this.setData({
+            deskindex: e.detail.value
         })
     },
     saveorder: function(e) {
