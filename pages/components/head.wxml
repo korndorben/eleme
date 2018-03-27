@@ -1,0 +1,7 @@
+    <view class="head">
+        <image bindtap="back" class="back" src="/images/back.png" mode="aspectFit"></image>
+        <view class="title">
+            订单确认
+        </view>
+        <image bindtap="account" class="account" src="/images/account.png" mode="aspectFit"></image>
+    </view>

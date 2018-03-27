@@ -7,8 +7,25 @@
     padding: 5% 5% 5% 5%;
 }
 
-.shopname, .products, .paymentmethod, .eattime, .remark, .control {
+.mealcodecontainer,.mealcode,.shopname, .products, .paymentmethod, .eattime, .remark, .control {
     width: 100%;
+    position: relative;
+}
+cover-view.mealcode{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 30px;
+    font-size: 52px;
+    font-weight: 700;
+    color:#fff;
+}
+cover-view.mealcodetips{
+    position: absolute;
+    text-align: center;
+    bottom: 15px;
+    width: 100%;
+    color:#fff;
 }
 
 .shopname {

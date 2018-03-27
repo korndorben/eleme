@@ -13,6 +13,12 @@ Page({
             totalPriceDescription: ''
         }
     },
+    account: function(e) {
+        console.log(e);
+    },
+    back: function(e) {
+        console.log(e);
+    },
     bindPickerChange: function(e) {
         this.setData({
             paymentmethodtype: e.detail.value

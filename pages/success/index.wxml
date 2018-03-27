@@ -1,4 +1,14 @@
 <include src="../components/head.wxml"/>
+<view class="mealcodecontainer">
+    <image class="mealcode" src="/images/bg-desk.jpg" mode="widthFix" binderror="" bindload="" >
+    <cover-view class="mealcode">
+        17
+    </cover-view>
+    <cover-view class="mealcodetips">
+        您的取餐码
+    </cover-view>
+    </image>
+</view>
 <view class="container">
     <view class="products">
         <view class="item">
@@ -19,32 +29,29 @@
     </view>
     <view class="paymentmethod">
         <view class="paymentmethod_title">支付方式</view>
-        <picker class="paymentmethod_options" bindchange="bindPickerChange" value="{{paymentmethodtype}}" range="{{paymentmethods}}">
-            <view class="picker">
-                {{paymentmethods[paymentmethodtype]}} >
-            </view>
-        </picker>
+        <view class="picker">
+            {{paymentmethods[paymentmethodtype]}}
+        </view>
     </view>
     <view class="paymentmethod">
         <view class="paymentmethod_title">用餐方式</view>
-        <picker class="paymentmethod_options" bindchange="bindDineModeChange" value="{{dinemodeindex}}" range="{{dinemodes}}">
-            <view class="picker">
-                {{dinemodes[dinemodeindex]}} >
-            </view>
-        </picker>
+        <view class="picker">
+            {{dinemodes[dinemodeindex]}}
+        </view>
     </view>
     <view class="paymentmethod">
         <view class="paymentmethod_title">用餐时间</view>
-        <picker class="paymentmethod_options" bindchange="bindEattimeChange" value="{{eattimeindex}}" range="{{eattimes}}">
-            <view class="picker">
-                {{eattimes[eattimeindex]}} >
-            </view>
-        </picker>
+        <view class="picker">
+            立即用餐
+        </view>
     </view>
-    <view class="remark">
-        <textarea bindblur="bindTextAreaBlur" auto-height placeholder="备注" />
+    <view class="paymentmethod">
+        <view class="paymentmethod_title">用户备注</view>
+        <view class="picker">
+            不要菜、不要肉
+        </view>
     </view>
     <view class="control">
-        <button class="dine" type="primary" loading="{{loading}}" bindtap="primary"> 提交订单 </button>
+        <button class="dine" type="primary" loading="{{loading}}" bindtap="primary"> 再来一单 </button>
     </view>
 </view>
