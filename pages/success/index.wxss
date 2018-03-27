@@ -117,7 +117,8 @@ cover-view.mealcodetips {
     width: 90%;
 }
 
-.control .dine {
+.forcoding .dine {
+    width: 90%;
     flex: 1;
 }
 

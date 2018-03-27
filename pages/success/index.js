@@ -24,4 +24,9 @@ Page({
             }
         })
     },
+    reorder: function(e) {
+        wx.navigateTo({
+            url: '/pages/shop/shop',
+        });
+    }
 })
