@@ -45,6 +45,6 @@
         <textarea bindblur="bindTextAreaBlur" auto-height placeholder="备注" />
     </view>
     <view class="control">
-        <button class="dine" type="primary" loading="{{loading}}" bindtap="primary"> 提交订单 </button>
+        <button class="dine" type="primary" loading="{{loading}}" bindtap="saveorder"> 提交订单 </button>
     </view>
 </view>

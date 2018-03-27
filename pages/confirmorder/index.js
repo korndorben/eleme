@@ -29,6 +29,11 @@ Page({
             eattimeindex: e.detail.value
         })
     },
+    saveorder: function(e) {
+        wx.navigateTo({
+            url: '/pages/success/index',
+        });
+    },
     bindDineModeChange: function(e) {
         this.setData({
             dinemodeindex: e.detail.value
@@ -36,11 +41,6 @@ Page({
     },
     bindTextAreaBlur: function(e) {
         console.log(e.detail.value)
-    },
-    chooseeattime: function() {
-        wx.navigateTo({
-            url: '/pages/confirmorder/eattime/eattime',
-        });
     },
     onLoad: function(option) {
         let self = this

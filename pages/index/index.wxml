@@ -18,7 +18,7 @@
                 <view class="title">会员</view>
                 <view class="desc">办会员只为看见你</view>
             </view>
-            <image class="icon" src="/images/account.png"></image>
+            <image class="icon" src="/images/account_fff.png"></image>
         </view>
     </view>
     <view class="mr line2">
