@@ -78,7 +78,7 @@
             <textarea bindblur="bindTextAreaBlur" placeholder="忌口、备注等" />
         </view>
     </view>
-    <view class="forcoding">
+    <view class="forcoding foot">
         <button class="dine" type="primary" loading="{{loading}}" bindtap="saveorder"> 提交订单 </button>
     </view>
 </scroll-view>

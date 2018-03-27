@@ -148,3 +148,6 @@ cover-view.mealcodetips {
 .last {
     border: 0;
 }
+.foot{
+    margin-bottom:30px;
+}

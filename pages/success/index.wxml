@@ -72,7 +72,7 @@
             </view>
         </view>
     </view>
-    <view class="forcoding">
+    <view class="forcoding foot">
         <button class="dine" type="primary" loading="{{loading}}" bindtap="reorder"> 再来一单 </button>
     </view>
 </scroll-view>
