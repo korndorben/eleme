@@ -1,15 +1,15 @@
-<include src="../components/head.wxml"/>
-<view class="mealcodecontainer">
-    <image class="mealcode" src="/images/bg-desk.jpg" mode="widthFix" binderror="" bindload="" >
-    <cover-view class="mealcode">
-        17
-    </cover-view>
-    <cover-view class="mealcodetips">
-        您的取餐码
-    </cover-view>
-    </image>
-</view>
-<view class="container">
+<scroll-view class="container" scroll-y>
+    <include src="../components/head.wxml"/>
+    <view class="mealcodecontainer">
+        <image class="mealcode" src="/images/bg-desk.jpg" mode="widthFix" binderror="" bindload="" >
+        <cover-view class="mealcode">
+            17
+        </cover-view>
+        <cover-view class="mealcodetips">
+            您的取餐码
+        </cover-view>
+        </image>
+    </view>
     <view class="block">
         <view class="products">
             <view class="item">
@@ -36,6 +36,11 @@
 
     </view>
     <view class="block forcoding">
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">
+                订单说明
+            </view>
+        </view>
         <view class="paymentmethod">
             <view class="paymentmethod_title">订单号</view>
             <view class="picker">
@@ -67,7 +72,7 @@
             </view>
         </view>
     </view>
-    <view class="control">
-        <button class="dine" type="primary" loading="{{loading}}" bindtap="primary"> 再来一单 </button>
+    <view class="forcoding">
+        <button class="dine" type="primary" loading="{{loading}}" bindtap="saveorder"> 再来一单 </button>
     </view>
-</view>
+</scroll-view>

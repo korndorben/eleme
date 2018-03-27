@@ -1,10 +1,13 @@
-<include src="../components/head.wxml"/>
-<view class="container">
+<scroll-view class="container" scroll-y>
+    <include src="../components/head.wxml"/>
     <view class="block">
         <view class="products">
             <view class="item">
-                <view class="name">商品</view>
-                <view class="quantity">数量</view>
+                <view class="name">订单详情</view>
+            </view>
+            <view class="item">
+                <view class="name">商品名称</view>
+                <view class="quantity">选购数量</view>
                 <view class="total">小计</view>
             </view>
             <view class="item" wx:for="{{shoppingcart.selection}}">
@@ -15,11 +18,16 @@
             <view class="item last">
                 <view class="name"></view>
                 <view class="quantity">订单合计</view>
-                <view class="total">{{shoppingcart.totalPriceDescription}}</view>
+                <view class="customertotal">{{shoppingcart.totalPriceDescription}}</view>
             </view>
         </view>
     </view>
     <view class="block forcoding">
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">
+                订单说明
+            </view>
+        </view>
         <view class="paymentmethod">
             <view class="paymentmethod_title">
             <image class="icon" src="/images/clock.png" mode="widthFix" binderror="" bindload=""></image>
@@ -66,11 +74,11 @@
             </picker>
         </view>
 
-        <view class="paymentmethod remark">
-            <textarea bindblur="bindTextAreaBlur" auto-height placeholder="忌口、备注等" />
+        <view class="paymentmethod remark last">
+            <textarea bindblur="bindTextAreaBlur" placeholder="忌口、备注等" />
         </view>
     </view>
-    <view class="control">
+    <view class="forcoding">
         <button class="dine" type="primary" loading="{{loading}}" bindtap="saveorder"> 提交订单 </button>
     </view>
-</view>
+</scroll-view>
