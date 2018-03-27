@@ -10,45 +10,61 @@
     </image>
 </view>
 <view class="container">
-    <view class="products">
-        <view class="item">
-            <view class="name">商品</view>
-            <view class="quantity">数量</view>
-            <view class="total">小计</view>
+    <view class="block">
+        <view class="products">
+            <view class="item">
+                <view class="name">订单详情</view>
+                <view class="quantity"></view>
+                <view class="total"></view>
+            </view>
+            <view class="item">
+                <view class="name">商品</view>
+                <view class="quantity">数量</view>
+                <view class="total">小计</view>
+            </view>
+            <view class="item" wx:for="{{shoppingcart.selection}}">
+                <view class="name">{{item.dish.name}}</view>
+                <view class="quantity">￥{{item.dishattr.pricetext}} x {{item.quantity}}</view>
+                <view class="total">￥{{item.totaldescription}}</view>
+            </view>
+            <view class="item last">
+                <view class="name"></view>
+                <view class="quantity">已支付</view>
+                <view class="customertotal">{{shoppingcart.totalPriceDescription}}</view>
+            </view>
         </view>
-        <view class="item" wx:for="{{shoppingcart.selection}}">
-            <view class="name">{{item.dish.name}}</view>
-            <view class="quantity">￥{{item.dishattr.pricetext}} x {{item.quantity}}</view>
-            <view class="total">￥{{item.totaldescription}}</view>
-        </view>
-        <view class="item">
-            <view class="name"></view>
-            <view class="quantity">订单合计</view>
-            <view class="total">{{shoppingcart.totalPriceDescription}}</view>
-        </view>
+
     </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">支付方式</view>
-        <view class="picker">
-            {{paymentmethods[paymentmethodtype]}}
+    <view class="block forcoding">
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">订单号</view>
+            <view class="picker">
+                12345678900
+            </view>
         </view>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">用餐方式</view>
-        <view class="picker">
-            {{dinemodes[dinemodeindex]}}
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">支付方式</view>
+            <view class="picker">
+                {{paymentmethods[paymentmethodtype]}}
+            </view>
         </view>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">用餐时间</view>
-        <view class="picker">
-            立即用餐
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">用餐方式</view>
+            <view class="picker">
+                {{dinemodes[dinemodeindex]}}
+            </view>
         </view>
-    </view>
-    <view class="paymentmethod">
-        <view class="paymentmethod_title">用户备注</view>
-        <view class="picker">
-            不要菜、不要肉
+        <view class="paymentmethod">
+            <view class="paymentmethod_title">用餐时间</view>
+            <view class="picker">
+                立即用餐
+            </view>
+        </view>
+        <view class="paymentmethod last">
+            <view class="paymentmethod_title">用户备注</view>
+            <view class="picker">
+                不要菜、不要肉
+            </view>
         </view>
     </view>
     <view class="control">
