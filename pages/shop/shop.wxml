@@ -12,8 +12,11 @@
                 </view>
                 <view class="description"> {{supplier.intro}} </view>
                 <view class="description"> {{supplier.address}} </view>
-                <view class="description"> {{supplier.hotline}} </view>
             </view>
+        </view>
+        <view class="bulletin-wrapper">
+          <image src="../image/bulletin@2x.png" style="width:22px;height:12px;"></image>
+          <span class="bulletin-text">"粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。"</span>
         </view>
         <view class="background">
             <image src="{{supplier.logo}}"></image>
@@ -44,7 +47,7 @@
                     <view class="content">
                         <view class="name">{{dish.name}}</view>
                         <view class="desc">{{dish.intro}}</view>
-                        <view class="extra">
+                        <view class="name">
                             <text class="count">月售{{dish.dishs}}</text>
                         </view>
                         <view class="price">
@@ -55,11 +58,9 @@
                         <view class="cartControl-wrapper">
                             <view class="cartControl">
                                 <view name="fade" wx:if="{{dish.dishattrs.length<=1}}">
-                                    <view class="cart-decrease" wx:if="{{selection[dish.uniquekey]}}" data-dish="{{dish}}" catchtap="decreaseCart1">
-                                        <view class="inner iconfont icon-jian"></view>
-                                    </view>
+                                    <image class="plus" wx:if="{{selection[dish.uniquekey]}}" src="/images/minus.png" data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="decreaseCart1"></image>
                                     <view class="cart-count" wx:if="{{selection[dish.uniquekey]}}">{{selection[dish.uniquekey]['quantity']}}</view>
-                                    <view class=" iconfont icon-jia cart-add " data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart1"></view>
+                                    <image class="plus" src="/images/plus.png" data-dishindex="{{dishindex}}" data-dish="{{dish}}" catchtap="addCart1"></image>
                                 </view>
                                  <view name="fade" wx:if="{{dish.dishattrs.length>1}}">
                                     <button data-dish="{{dish}}" class="choosespec" catchtap="choosespec" type="primary">选规格</button>
@@ -85,7 +86,7 @@
             <view class="content-left">
                 <view class="logo-wrapper">
                     <view class="logo highlight">
-                        <view class="iconfont icon-gouwuche highlight"></view>
+                        <image class="gouwuche" src="/images/cart_fff.png" mode="widthFix" binderror="" bindload=""></image>
                     </view>
                     <view class="num" wx:if="{{totalCount> 0}}">{{totalCount}}</view>
                 </view>
@@ -114,11 +115,9 @@
                     <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.quantity}}">
                         <view class="cartControl" style="width:80px;">
                             <view name="fade">
-                                <view class="cart-decrease" style="display:inline-block;" data-item="{{item}}" catchtap="decreaseCart2">
-                                    <view class="inner iconfont icon-jian" style="font-size:24px;color:#00A0DC;"></view>
-                                </view>
-                                <view class="cart-count" style="display:inline-block;width:32px;text-align:center;font-size:14px;">{{item.quantity}}</view>
-                                <view class=" iconfont icon-jia cart-add " style="font-size:24px;color:#00A0DC; padding:0;" data-item="{{item}}" catchtap="addCart2"></view>
+                                <image class="plus" src="/images/minus.png" data-item="{{item}}" catchtap="decreaseCart2"></image>
+                                <view class="cart-count">{{item.quantity}}</view>
+                                <image class="plus" src="/images/plus.png" data-item="{{item}}" catchtap="addCart2"></image>
                             </view>
                         </view>
                     </view>

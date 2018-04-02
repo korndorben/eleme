@@ -39,6 +39,7 @@
     padding: 20px;
     color: #fefefe;
     align-items: center;
+    /* border-radius: 5px; */
 }
 
 .content {
