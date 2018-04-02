@@ -40,7 +40,6 @@
             </view>
             <view class="content">
                 <view class="title">我的订单</view>
-                <view class="desc">您最近七天没有订单</view>
             </view>
             <view class="more">
                 <image src="/images/more.png" mode="widthFix" binderror="" bindload=""></image>
