@@ -1,10 +1,10 @@
 {
     "pages": [
-        "pages/my/index",
         "pages/index/index",
         "pages/confirmorder/index",
         "pages/success/index",
         "pages/shop/shop",
+        "pages/my/index",
         "pages/details/index"
     ],
     "window": {
