@@ -1,8 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-    <image mode="widthFix" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <view class="userinfo-nickname">
-        张保坤
+    <view class="prifile">
+        <image mode="widthFix" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <view class="userinfo-nickname">
+            <view class="usrname">
+                张保坤
+            </view>
+            <view class="usrmobile">
+                135-2036-2996 编辑
+            </view>
+        </view>
     </view>
     <view class="userinfo-assets as1">
         <view class="balance">
@@ -28,21 +35,51 @@
     </view>
     <view class="list">
         <view class="account">
+            <view class="ico">
+                <image src="/images/cart.png" mode="widthFix" binderror="" bindload=""></image>
+            </view>
             <view class="content">
-                <view class="title">余额明细</view>
+                <view class="title">我的订单</view>
                 <view class="desc">您最近七天没有订单</view>
+            </view>
+            <view class="more">
+                <image src="/images/more.png" mode="widthFix" binderror="" bindload=""></image>
             </view>
         </view>
         <view class="account">
+            <view class="ico">
+                <image src="/images/dollar.png" mode="widthFix" binderror="" bindload=""></image>
+            </view>
             <view class="content">
-                <view class="title">积分变动</view>
+                <view class="title">充值记录</view>
                 <view class="desc">您最近七天没有订单</view>
+            </view>
+            <view class="more">
+                <image src="/images/more.png" mode="widthFix" binderror="" bindload=""></image>
             </view>
         </view>
         <view class="account">
+            <view class="ico">
+                <image src="/images/bussiness-card.png" mode="widthFix" binderror="" bindload=""></image>
+            </view>
+            <view class="content">
+                <view class="title">我的会员卡</view>
+                <view class="desc">您现在是黄金会员</view>
+            </view>
+            <view class="more">
+                <image src="/images/more.png" mode="widthFix" binderror="" bindload=""></image>
+            </view>
+        </view>
+        <view class="account">
+            <view class="ico">
+                <image src="/images/addr.png" mode="widthFix" binderror="" bindload=""></image>
+            </view>
             <view class="content">
                 <view class="title">地址管理</view>
                 <view class="desc">您还没有填写地址</view>
+            </view>
+            <view class="more">
+                <image src="/images/more.png" mode="widthFix" binderror="" bindload=""></image>
             </view>
         </view>
     </view>
